@@ -18,7 +18,7 @@ export default function Body({
                 <Link href={"/"}>
                     <div className="relative w-[100%] h-[100%]">
                         <Image
-                            src={"/logoGlow0.png"}
+                            src={"/logoGlow.png"}
                             alt={"Logo"}
                             fill
                             className="object-contain"
