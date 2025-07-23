@@ -8,16 +8,11 @@ const itemSchema = new Schema(
         options: [
             {
                 size: String,
-                quality: [
-                    {
-                        type: String,
-                        price: Number,
-                        printing: {
-                            time: { hours: Number, minutes: Number },
-                            weight: Number,
-                        },
-                    },
-                ],
+                price: Number,
+                printing: {
+                    time: { hours: Number, minutes: Number },
+                    weight: Number,
+                },
             },
         ],
     },

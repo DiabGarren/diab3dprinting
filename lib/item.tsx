@@ -6,16 +6,11 @@ export interface Item {
     options: [
         {
             size: string;
-            quality: [
-                {
-                    type: string;
-                    price: number;
-                    printing: {
-                        time: { hours: number; minutes: number };
-                        weight: number;
-                    };
-                }
-            ];
+            price: number;
+            printing: {
+                time: { hours: number; minutes: number };
+                weight: number;
+            };
         }
     ];
 }
