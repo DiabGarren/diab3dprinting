@@ -1,6 +1,7 @@
 import { Colour } from "@/lib/interfaces/colour";
 import { Item } from "@/lib/interfaces/item";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function ItemCard({
     item,
@@ -22,26 +23,43 @@ export default function ItemCard({
     }
 
     return (
-        <div className="w-[250px] border-[2px] border-(--primary) rounded m-[5px] p-[2px]">
-            <div className="relative w-[100%] h-[120px]">
+        <Link
+            href={"/items/" + item._id}
+            className="border-b-[2px] border-b-(--primary) m-[5px] flex p-[10px]"
+        >
+            <div className="relative w-[150px] h-[120px]">
                 <Image
                     src={"/items/" + item.itemId + "0.jpg"}
                     alt={item.name + " thumbnail image"}
                     fill
-                    className="object-cover"
+                    className="object-cover rounded"
                 />
             </div>
 
-            <h2>{item.name}</h2>
-            <p>From: R{item.options[0].price}</p>
-            <p>
-                {item.options.length} size{item.options.length > 1 ? "s" : ""}{" "}
-                available
-            </p>
-            <p>
-                {itemColours.length} colour{itemColours.length > 1 ? "s" : ""}{" "}
-                available
-            </p>
-        </div>
+            <div className="px-[10px] flex-1">
+                <h2 className="font-[600] text-[16x]">{item.name}</h2>
+                <p className="my-[5px]">
+                    <span className="font-[600] text-[16px]">From </span>
+                    <span className="font-[700] text-[18px]">
+                        R{item.options[0].price}
+                    </span>
+                </p>
+                <div className="text-[14px] mt-[8px]">
+                    <p>
+                        <span className="text-[16px] font-[500]">
+                            {item.options.length}
+                        </span>{" "}
+                        size
+                        {item.options.length > 1 ? "s" : ""}
+                        <br />
+                        <span className="text-[16px] font-[500]">
+                            {itemColours.length}
+                        </span>{" "}
+                        colour
+                        {itemColours.length > 1 ? "s" : ""}
+                    </p>
+                </div>
+            </div>
+        </Link>
     );
 }
