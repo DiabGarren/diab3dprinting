@@ -28,12 +28,13 @@ export async function POST(request: Request) {
         if (!pass) return createErrorResponse("Password is incorrect", 500);
 
         biscuits.set("diab3dprinting-user", user._id);
+
         return new NextResponse(
             JSON.stringify({
                 status: "success",
             }),
             {
-                status: 201,
+                status: 200,
                 headers: { "Content-Type": "application/json" },
             }
         );
