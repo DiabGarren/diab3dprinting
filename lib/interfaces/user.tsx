@@ -1,4 +1,5 @@
 export interface User {
+    _id: string;
     firstName: string;
     lastName: string;
     username: string;
@@ -10,12 +11,12 @@ export interface User {
     cart: [
         {
             _id: string;
+            itemId: string;
             name: string;
             size: string;
             price: number;
             colour: string;
-            multiColour: boolean;
-            image: string;
+            images: number;
             qty: number;
         }
     ];

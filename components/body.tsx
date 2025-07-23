@@ -1,5 +1,6 @@
 "use client";
 
+import { User } from "@/lib/interfaces/user";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -7,9 +8,11 @@ import { useState } from "react";
 export default function Body({
     children,
     active,
+    user,
 }: {
     children: React.ReactNode;
     active: string;
+    user: User;
 }) {
     const [nav, setNav] = useState(false);
     return (
@@ -93,34 +96,81 @@ export default function Body({
                 <ul className="[&_a]:block [&_a]:w-[100%] [&_a]:text-white [&_a]:text-center [&_a]:py-[5px] [&_a]:hover:bg-(--primary-dark) [&_a]:hover:underline [&_li]:border-y-[1px] [&_li]:border-(--primary-dark) [&_li]:first:border-t-[0px] [&_li]:last:border-b-[0px]">
                     <li>
                         <Link
-                            href={"/cart"}
+                            href={"/"}
                             className={
-                                active == "cart" ? "bg-(--primary-dark)" : ""
+                                active == "home" ? "bg-(--primary-dark)" : ""
                             }
                         >
-                            Cart
+                            Home
                         </Link>
                     </li>
-                    <li>
-                        <Link
-                            href={"/profile"}
-                            className={
-                                active == "profile" ? "bg-(--primary-dark)" : ""
-                            }
-                        >
-                            Profile
-                        </Link>
-                    </li>
-                    <li>
-                        <Link
-                            href={"/orders"}
-                            className={
-                                active == "orders" ? "bg-(--primary-dark)" : ""
-                            }
-                        >
-                            Orders
-                        </Link>
-                    </li>
+                    {!user._id ? (
+                        <>
+                            <li>
+                                <Link
+                                    href={"/login"}
+                                    className={
+                                        active == "login"
+                                            ? "bg-(--primary-dark)"
+                                            : ""
+                                    }
+                                >
+                                    Login
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
+                                    href={"/register"}
+                                    className={
+                                        active == "register"
+                                            ? "bg-(--primary-dark)"
+                                            : ""
+                                    }
+                                >
+                                    Sign Up
+                                </Link>
+                            </li>
+                        </>
+                    ) : (
+                        <>
+                            <li>
+                                <Link
+                                    href={"/cart"}
+                                    className={
+                                        active == "cart"
+                                            ? "bg-(--primary-dark)"
+                                            : ""
+                                    }
+                                >
+                                    Cart
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
+                                    href={"/profile"}
+                                    className={
+                                        active == "profile"
+                                            ? "bg-(--primary-dark)"
+                                            : ""
+                                    }
+                                >
+                                    Profile
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
+                                    href={"/orders"}
+                                    className={
+                                        active == "orders"
+                                            ? "bg-(--primary-dark)"
+                                            : ""
+                                    }
+                                >
+                                    Orders
+                                </Link>
+                            </li>
+                        </>
+                    )}
                 </ul>
             </nav>
             <main className="mx-auto mt-[50px]">{children}</main>

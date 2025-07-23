@@ -13,19 +13,19 @@ export async function POST(request: Request) {
 
         let user = null;
 
-        if (body.email.includes("@"))
-            user = await User.findOne({ email: body.email });
+        if (body.username.includes("@"))
+            user = await User.findOne({ email: body.username });
         else if (!body.username.includes("@"))
             user = await User.findOne({ username: body.username });
 
         if (!user) {
-            return createErrorResponse("Username/Email does not exist", 500);
+            return createErrorResponse("Username/Email does not exist", 406);
         }
         if (body.password === "")
-            return createErrorResponse("Please enter a password", 500);
+            return createErrorResponse("Please enter a password", 406);
 
         const pass = await compare(body.password, user.password);
-        if (!pass) return createErrorResponse("Password is incorrect", 500);
+        if (!pass) return createErrorResponse("Password is incorrect", 406);
 
         biscuits.set("diab3dprinting-user", user._id);
 

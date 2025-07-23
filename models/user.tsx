@@ -13,13 +13,12 @@ const userSchema = new Schema(
         cart: [
             {
                 _id: String,
+                itemId: String,
                 name: String,
                 size: String,
                 price: Number,
                 colour: String,
-                multiColour: Boolean,
-                base: String,
-                image: String,
+                images: Number,
                 qty: Number,
             },
         ],
