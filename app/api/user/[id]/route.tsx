@@ -5,12 +5,13 @@ import { NextResponse } from "next/server";
 
 export async function GET(
     request: Request,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
         await connectDb();
 
-        const user = await User.findOne({ _id: params.id });
+        const { id } = await params;
+        const user = await User.findOne({ _id: id });
 
         if (!user) {
             return createErrorResponse("No user found", 404);
