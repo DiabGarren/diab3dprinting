@@ -1,28 +1,27 @@
 "use client";
 import Body from "@/components/body";
 import ItemCard from "@/components/itemCard";
-import { Item } from "@/lib/item";
-import { Metadata } from "@/lib/metadata";
+import { Colour } from "@/lib/interfaces/colour";
+import { Item } from "@/lib/interfaces/item";
+import { Metadata } from "@/lib/interfaces/metadata";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
 export default function Home() {
-    const [items, setItems] = useState<[]>([]);
+    const [items, setItems] = useState<Item[]>([]);
+    const [colours, setColours] = useState<Colour[]>([]);
     const [metadata, setMetadata] = useState<Metadata>();
 
     useEffect(() => {
-        const getItems = async () => {
+        const getProps = async () => {
             fetch(process.env.NEXT_PUBLIC_API_URL + "/items")
                 .then((res) => res.json())
                 .then((data) => {
                     if (data.status === "success") {
-                        console.log(data.data);
-
-                        setItems(data.data);
+                        setItems(data.data.items);
+                        setColours(data.data.colours);
                     }
                 });
-        };
-        const getMetadata = async () => {
             fetch(process.env.NEXT_PUBLIC_API_URL + "/metadata")
                 .then((res) => res.json())
                 .then((data) => {
@@ -31,8 +30,7 @@ export default function Home() {
                     }
                 });
         };
-        getItems();
-        getMetadata();
+        getProps();
     }, []);
 
     return (
@@ -44,7 +42,13 @@ export default function Home() {
                 {items.length > 0 ? (
                     <>
                         {items.map((item: Item, index: number) => {
-                            return <ItemCard {...item} key={"item-" + index} />;
+                            return (
+                                <ItemCard
+                                    item={item}
+                                    colours={colours}
+                                    key={"item-" + index}
+                                />
+                            );
                         })}
                     </>
                 ) : (
