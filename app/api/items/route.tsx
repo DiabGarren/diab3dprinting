@@ -1,5 +1,6 @@
 import connectDb from "@/lib/connectDb";
 import { createErrorResponse } from "@/lib/utils";
+import Colour from "@/models/colour";
 import Item from "@/models/item";
 import { NextResponse } from "next/server";
 
@@ -8,10 +9,11 @@ export async function GET() {
         await connectDb();
 
         const items = await Item.find({});
+        const colours = await Colour.find({});
 
         const res = {
             status: "success",
-            data: items,
+            data: { items: items, colours: colours },
         };
 
         return new NextResponse(JSON.stringify(res), {
