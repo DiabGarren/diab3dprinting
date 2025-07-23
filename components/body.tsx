@@ -4,7 +4,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
-export default function Body({ children }: { children: React.ReactNode }) {
+export default function Body({
+    children,
+    active,
+}: {
+    children: React.ReactNode;
+    active: string;
+}) {
     const [nav, setNav] = useState(false);
     return (
         <>
@@ -86,13 +92,34 @@ export default function Body({ children }: { children: React.ReactNode }) {
             <nav className={`${nav ? "block" : "hidden"} bg-(--primary)`}>
                 <ul className="[&_a]:block [&_a]:w-[100%] [&_a]:text-white [&_a]:text-center [&_a]:py-[5px] [&_a]:hover:bg-(--primary-dark) [&_a]:hover:underline [&_li]:border-y-[1px] [&_li]:border-(--primary-dark) [&_li]:first:border-t-[0px] [&_li]:last:border-b-[0px]">
                     <li>
-                        <Link href={"/cart"}>Cart</Link>
+                        <Link
+                            href={"/cart"}
+                            className={
+                                active == "cart" ? "bg-(--primary-dark)" : ""
+                            }
+                        >
+                            Cart
+                        </Link>
                     </li>
                     <li>
-                        <Link href={"/profile"}>Profile</Link>
+                        <Link
+                            href={"/profile"}
+                            className={
+                                active == "profile" ? "bg-(--primary-dark)" : ""
+                            }
+                        >
+                            Profile
+                        </Link>
                     </li>
                     <li>
-                        <Link href={"/orders"}>Orders</Link>
+                        <Link
+                            href={"/orders"}
+                            className={
+                                active == "orders" ? "bg-(--primary-dark)" : ""
+                            }
+                        >
+                            Orders
+                        </Link>
                     </li>
                 </ul>
             </nav>

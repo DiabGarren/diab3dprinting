@@ -1,8 +1,8 @@
 import Body from "@/components/body";
 
-export default function CreateItem() {
+export default function Item() {
     return (
-        <Body active="createItem">
+        <Body active="">
             <></>
         </Body>
     );

@@ -36,7 +36,7 @@ export default function Home() {
     }, []);
 
     return (
-        <Body>
+        <Body active="">
             <div className="relative object-fit h-[180px] w-[100%]">
                 <Image src={"/hero.jpg"} alt={"Hero Image"} fill />
             </div>
