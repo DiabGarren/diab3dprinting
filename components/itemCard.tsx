@@ -24,7 +24,7 @@ export default function ItemCard({
 
     return (
         <Link
-            href={"/items/" + item._id}
+            href={"/item/" + item._id}
             className="border-b-[2px] border-b-(--primary) m-[5px] flex p-[10px]"
         >
             <div className="relative w-[150px] h-[120px]">
