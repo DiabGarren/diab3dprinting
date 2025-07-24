@@ -16,7 +16,9 @@ export async function POST(request: Request) {
         if (body.username.includes("@"))
             user = await User.findOne({ email: body.username });
         else if (!body.username.includes("@"))
-            user = await User.findOne({ username: body.username });
+            user = await User.findOne({
+                username: body.username.toLowerCase(),
+            });
 
         if (!user) {
             return createErrorResponse("Username/Email does not exist", 406);
