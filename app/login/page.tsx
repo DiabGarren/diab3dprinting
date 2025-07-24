@@ -92,7 +92,9 @@ export default function Login() {
                         setUser({ ...user, password: event.target.value })
                     }
                 />
-                <Button type="submit">Log In</Button>
+                <Button type="submit" className="button-green">
+                    Log In
+                </Button>
             </form>
         </Body>
     );

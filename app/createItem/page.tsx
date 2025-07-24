@@ -106,6 +106,9 @@ export default function CreateItem() {
     return (
         <Body active="createItem" user={user}>
             <Back callback="/" />
+            <h1 className="text-center text-[25px] font-[500] mb-[15px]">
+                Create Item
+            </h1>
             <h2>{error}</h2>
             <form
                 onSubmit={async (event) => {
@@ -136,6 +139,7 @@ export default function CreateItem() {
                 <Input
                     type="text"
                     label="Item Name"
+                    className="form-input"
                     onChange={(event) =>
                         setItem({ ...item, name: event.target.value })
                     }
@@ -194,13 +198,16 @@ export default function CreateItem() {
                         )
                     )}
                 </Select>
-                <h2>Options</h2>
+                <h2 className="text-center text-[20px] font-[500]">Options</h2>
                 {item.options.map((x, index: number) => {
                     return (
                         <div className="my-[5px]" key={index}>
-                            <div>
-                                <span>Option {index + 1}</span>
-                                <Button
+                            <div className="text-center">
+                                <span className="inline-block text-[18px] p-[5px]">
+                                    Option {index + 1}
+                                </span>
+                                <button
+                                    className="bg-[#f54545] w-[35px] p-[5px] rounded trash cursor-pointer"
                                     onClick={() => {
                                         const options = item.options;
                                         options.splice(index, 1);
@@ -211,8 +218,14 @@ export default function CreateItem() {
                                         });
                                     }}
                                 >
-                                    del
-                                </Button>
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 640 640"
+                                        className="w-[25px]"
+                                    >
+                                        <path d="M262.2 48C248.9 48 236.9 56.3 232.2 68.8L216 112L120 112C106.7 112 96 122.7 96 136C96 149.3 106.7 160 120 160L520 160C533.3 160 544 149.3 544 136C544 122.7 533.3 112 520 112L424 112L407.8 68.8C403.1 56.3 391.2 48 377.8 48L262.2 48zM128 208L128 512C128 547.3 156.7 576 192 576L448 576C483.3 576 512 547.3 512 512L512 208L464 208L464 512C464 520.8 456.8 528 448 528L192 528C183.2 528 176 520.8 176 512L176 208L128 208zM288 280C288 266.7 277.3 256 264 256C250.7 256 240 266.7 240 280L240 456C240 469.3 250.7 480 264 480C277.3 480 288 469.3 288 456L288 280zM400 280C400 266.7 389.3 256 376 256C362.7 256 352 266.7 352 280L352 456C352 469.3 362.7 480 376 480C389.3 480 400 469.3 400 456L400 280z" />
+                                    </svg>
+                                </button>
                             </div>
                             <Input
                                 type="text"
@@ -370,6 +383,7 @@ export default function CreateItem() {
                     );
                 })}
                 <Button
+                    className="button-green"
                     onClick={() => {
                         const options = item.options;
                         options.push({
@@ -403,7 +417,9 @@ export default function CreateItem() {
                         })
                     }
                 />
-                <Button type="submit">Create Item</Button>
+                <Button type="submit" className="button-green">
+                    Create Item
+                </Button>
             </form>
         </Body>
     );

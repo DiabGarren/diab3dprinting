@@ -53,11 +53,12 @@ export default function Profile() {
     return (
         <Body active="profile" user={user}>
             <Button
+                className="button-red"
                 onClick={() => {
                     fetch(process.env.NEXT_PUBLIC_API_URL + "/logout", {
                         method: "POST",
                     }).then((res) => {
-                        if (res.status === 201) push("/");
+                        if (res.status === 200) push("/");
                     });
                 }}
             >
