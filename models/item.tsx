@@ -15,6 +15,7 @@ const itemSchema = new Schema(
                 },
             },
         ],
+        images: Number,
     },
     { collection: "items" }
 );

@@ -1,8 +1,11 @@
 export interface Item {
-    _id: { $oid: string };
+    _id: string;
     itemId: string;
     name: string;
-    colours: [{ name: string; value: string }];
+    colours:
+        | [{ name: string; value: string }]
+        | { name: string; value: string }[]
+        | [];
     options: [
         {
             size: string;
@@ -13,4 +16,5 @@ export interface Item {
             };
         }
     ];
+    images: number;
 }
