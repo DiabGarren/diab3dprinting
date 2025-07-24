@@ -48,7 +48,11 @@ export default function Home() {
                 .then((res) => res.json())
                 .then((data) => {
                     if (data.status === "success") {
-                        setItems(data.data.items);
+                        setItems(
+                            data.data.items.sort((a: Item, b: Item) =>
+                                a.name > b.name ? 1 : -1
+                            )
+                        );
                         setColours(data.data.colours);
                     }
                 });
