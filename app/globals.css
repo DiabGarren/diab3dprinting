@@ -20,6 +20,36 @@ body {
     font-family: "IBM Plex Sans", sans-serif;
 }
 
+nav {
+    position: absolute;
+    z-index: 100;
+    width: 100%;
+
+    li {
+        a {
+            display: block;
+            width: 100%;
+            color: white;
+            text-align: center;
+            padding-block: 10px;
+
+            &:hover {
+                background-color: var(--primary-dark);
+                text-decoration: underline;
+            }
+        }
+        border-block: 1px solid var(--primary-dark);
+
+        &:first-of-type {
+            border-top: 2px;
+        }
+
+        &:last-of-type {
+            border-bottom: 2px;
+        }
+    }
+}
+
 /* Max width: 425px */
 @media only screen and (min-width: 376px) {
     html {

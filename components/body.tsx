@@ -92,12 +92,8 @@ export default function Body({
                     </svg>
                 </button>
             </header>
-            <nav
-                className={`${
-                    nav ? "block" : "hidden"
-                } absolute z-[100] w-[100%] bg-(--primary)`}
-            >
-                <ul className="[&_a]:block [&_a]:w-[100%] [&_a]:text-white [&_a]:text-center [&_a]:py-[5px] [&_a]:hover:bg-(--primary-dark) [&_a]:hover:underline [&_li]:border-y-[1px] [&_li]:border-(--primary-dark) [&_li]:first:border-t-[2px] [&_li]:last:border-b-[2px]">
+            <nav className={`${nav ? "block" : "hidden"} bg-(--primary)`}>
+                <ul>
                     <li>
                         <Link
                             href={"/"}
