@@ -227,7 +227,7 @@ export default function Body({
                     )}
                 </ul>
             </nav>
-            <main className="mx-auto pt-[35px]">{children}</main>
+            <main className="mx-auto">{children}</main>
             <footer></footer>
         </>
     );

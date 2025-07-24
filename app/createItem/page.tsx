@@ -135,14 +135,14 @@ export default function CreateItem() {
             >
                 <Input
                     type="text"
-                    label="ItemName"
+                    label="Item Name"
                     onChange={(event) =>
                         setItem({ ...item, name: event.target.value })
                     }
                 />
                 <Input
                     type="text"
-                    label="ItemId"
+                    label="Item ID"
                     description="Used to identify the image files"
                     onChange={(event) =>
                         setItem({ ...item, itemId: event.target.value })
@@ -182,7 +182,7 @@ export default function CreateItem() {
                                 key={colour.value}
                                 startContent={
                                     <div
-                                        className="rounded-[50%] w-[30px] h-[30px] border-[1px]"
+                                        className="rounded-[50%] w-[25px] aspect-[1/1] border-[1px]"
                                         style={{
                                             backgroundColor: colour.value,
                                         }}
@@ -216,7 +216,7 @@ export default function CreateItem() {
                             </div>
                             <Input
                                 type="text"
-                                label="Size"
+                                label="Item Size"
                                 value={item.options[index].size}
                                 onChange={(event) => {
                                     const options = item.options;
