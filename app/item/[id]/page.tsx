@@ -1,4 +1,5 @@
 "use client";
+import Back from "@/components/back";
 import Body from "@/components/body";
 import { User } from "@/lib/interfaces/user";
 import { useState } from "react";
@@ -35,7 +36,7 @@ export default function Item() {
     });
     return (
         <Body active="" user={user}>
-            <></>
+            <Back callback="" />
         </Body>
     );
 }
