@@ -147,26 +147,33 @@ export default function CreateOrder() {
                                                     const newOrder = [...order];
                                                     newOrder[index].size =
                                                         event.target.value;
-                                                    const itemIndex =
-                                                        items.findIndex(
-                                                            (item) =>
-                                                                item.itemId ===
-                                                                order[index]
-                                                                    .itemId
-                                                        );
-                                                    newOrder[index].price =
-                                                        items[
-                                                            itemIndex
-                                                        ].options[
+                                                    try {
+                                                        const itemIndex =
+                                                            items.findIndex(
+                                                                (item) =>
+                                                                    item.itemId ===
+                                                                    order[index]
+                                                                        .itemId
+                                                            );
+                                                        newOrder[index].price =
                                                             items[
                                                                 itemIndex
-                                                            ].options.findIndex(
-                                                                (option) =>
-                                                                    option.size ===
-                                                                    event.target
-                                                                        .value
-                                                            )
-                                                        ].price;
+                                                            ].options[
+                                                                items[
+                                                                    itemIndex
+                                                                ].options.findIndex(
+                                                                    (option) =>
+                                                                        option.size ===
+                                                                        event
+                                                                            .target
+                                                                            .value
+                                                                )
+                                                            ].price;
+                                                    } catch (error: unknown) {
+                                                        newOrder[
+                                                            index
+                                                        ].price = 0;
+                                                    }
                                                     setOrder(newOrder);
                                                 }}
                                             >
