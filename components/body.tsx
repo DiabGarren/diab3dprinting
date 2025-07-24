@@ -92,8 +92,12 @@ export default function Body({
                     </svg>
                 </button>
             </header>
-            <nav className={`${nav ? "block" : "hidden"} bg-(--primary)`}>
-                <ul className="[&_a]:block [&_a]:w-[100%] [&_a]:text-white [&_a]:text-center [&_a]:py-[5px] [&_a]:hover:bg-(--primary-dark) [&_a]:hover:underline [&_li]:border-y-[1px] [&_li]:border-(--primary-dark) [&_li]:first:border-t-[0px] [&_li]:last:border-b-[0px]">
+            <nav
+                className={`${
+                    nav ? "block" : "hidden"
+                } absolute z-[100] w-[100%] bg-(--primary)`}
+            >
+                <ul className="[&_a]:block [&_a]:w-[100%] [&_a]:text-white [&_a]:text-center [&_a]:py-[5px] [&_a]:hover:bg-(--primary-dark) [&_a]:hover:underline [&_li]:border-y-[1px] [&_li]:border-(--primary-dark) [&_li]:first:border-t-[2px] [&_li]:last:border-b-[2px]">
                     <li>
                         <Link
                             href={"/"}
@@ -169,6 +173,60 @@ export default function Body({
                                     Orders
                                 </Link>
                             </li>
+                            {user.level > 1 ? (
+                                <>
+                                    <li>
+                                        <Link
+                                            href={"/allOrders"}
+                                            className={
+                                                active == "allOrders"
+                                                    ? "bg-(--primary-dark)"
+                                                    : ""
+                                            }
+                                        >
+                                            All Orders
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link
+                                            href={"/createOrder"}
+                                            className={
+                                                active == "createOrder"
+                                                    ? "bg-(--primary-dark)"
+                                                    : ""
+                                            }
+                                        >
+                                            Create Order
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link
+                                            href={"/createItem"}
+                                            className={
+                                                active == "createItem"
+                                                    ? "bg-(--primary-dark)"
+                                                    : ""
+                                            }
+                                        >
+                                            Create Item
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link
+                                            href={"/costCalculator"}
+                                            className={
+                                                active == "costCalculator"
+                                                    ? "bg-(--primary-dark)"
+                                                    : ""
+                                            }
+                                        >
+                                            Cost Calculator
+                                        </Link>
+                                    </li>
+                                </>
+                            ) : (
+                                <></>
+                            )}
                         </>
                     )}
                 </ul>
