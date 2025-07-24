@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import connectDb from "@/lib/connectDb";
 import { createErrorResponse } from "@/lib/utils";
 import Colour from "@/models/colour";
@@ -17,10 +18,38 @@ export async function GET() {
         };
 
         return new NextResponse(JSON.stringify(res), {
+            status: 200,
+            headers: { "Content-Type": "application/json" },
+        });
+    } catch (error: any) {
+        return createErrorResponse(error.message, 500);
+    }
+}
+
+export async function POST(request: Request) {
+    try {
+        await connectDb();
+        const body = await request.json();
+
+        console.log(body);
+
+        const item = await Item.create({
+            itemId: body.itemId,
+            name: body.name,
+            colours: body.colours,
+            options: body.options,
+            images: body.images,
+        });
+
+        const res = {
+            status: "success",
+            data: item,
+        };
+
+        return new NextResponse(JSON.stringify(res), {
             status: 201,
             headers: { "Content-Type": "application/json" },
         });
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
         return createErrorResponse(error.message, 500);
     }

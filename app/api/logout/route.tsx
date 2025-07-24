@@ -13,7 +13,7 @@ export async function POST() {
                 status: "success",
             }),
             {
-                status: 201,
+                status: 200,
                 headers: { "Content-Type": "application/json" },
             }
         );
