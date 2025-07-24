@@ -10,6 +10,26 @@
     --primary-dark: #062758;
 }
 
+/* Max width: 375px */
+html {
+    background-image: url("/background.svg");
+    background-size: 100px;
+}
+
 body {
     font-family: "IBM Plex Sans", sans-serif;
+}
+
+/* Max width: 425px */
+@media only screen and (min-width: 376px) {
+    html {
+        background-size: 115px;
+    }
+}
+
+/* Max width: ~px */
+@media only screen and (min-width: 426px) {
+    html {
+        background-size: 150px;
+    }
 }
