@@ -29,7 +29,7 @@ export default function ItemCard({
         >
             <div className="relative w-[150px] h-[120px]">
                 <Image
-                    src={"/items/" + item.itemId + "0.jpg"}
+                    src={"/items/" + item.itemId + "/" + item.itemId + "0.jpg"}
                     alt={item.name + " thumbnail image"}
                     fill
                     className="object-cover rounded"
