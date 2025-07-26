@@ -202,12 +202,12 @@ export default function CreateItem() {
                 {item.options.map((x, index: number) => {
                     return (
                         <div className="my-[5px]" key={index}>
-                            <div className="text-center">
-                                <span className="inline-block text-[18px] p-[5px]">
+                            <div className="flex items-center justify-center">
+                                <span className="text-[18px]">
                                     Option {index + 1}
                                 </span>
                                 <button
-                                    className="bg-[#f54545] w-[35px] p-[5px] rounded trash cursor-pointer"
+                                    className="bg-[#f54545] w-[35px] p-[5px] rounded trash cursor-pointer ml-[15px]"
                                     onClick={() => {
                                         const options = item.options;
                                         options.splice(index, 1);
