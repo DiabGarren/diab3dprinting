@@ -87,6 +87,7 @@ export default function Home() {
                     className="object-cover"
                 />
             </div>
+            <h1 className="text-center">3D Prints</h1>
             <div className="items">
                 {items.length > 0 ? (
                     <>
