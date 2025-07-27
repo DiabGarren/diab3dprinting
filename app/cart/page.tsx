@@ -1,7 +1,9 @@
 "use client";
+import Back from "@/components/back";
 import Body from "@/components/body";
 import { User } from "@/lib/interfaces/user";
-import { useState } from "react";
+import Image from "next/image";
+import { useEffect, useState } from "react";
 
 export default function Cart() {
     const [user, setUser] = useState<User>({
@@ -22,7 +24,6 @@ export default function Cart() {
                 size: "",
                 price: 0,
                 colour: "",
-                images: 0,
                 qty: 0,
             },
         ],
@@ -33,9 +34,119 @@ export default function Cart() {
             postalCode: "",
         },
     });
+
+    const [total, setTotal] = useState(0);
+
+    useEffect(() => {
+        const getUser = async () => {
+            fetch(process.env.NEXT_PUBLIC_API_URL + "/user")
+                .then((res) => res.json())
+                .then((data) => {
+                    if (data.status == "success") {
+                        setUser(data.data);
+                        let sub = 0;
+                        data.data.cart.forEach(
+                            (item: {
+                                _id: "";
+                                itemId: "";
+                                name: "";
+                                size: "";
+                                price: 0;
+                                colour: "";
+                                qty: 0;
+                            }) => {
+                                sub += item.price * item.qty;
+                            }
+                        );
+                        setTotal(sub);
+                    }
+                });
+        };
+        getUser();
+    }, []);
+
     return (
         <Body active="cart" user={user}>
-            <></>
+            <Back href="/" />
+            <div className="cart-items">
+                {user.cart.length > 0 ? (
+                    <>
+                        {user.cart.map(
+                            (
+                                item: {
+                                    _id: string;
+                                    itemId: string;
+                                    name: string;
+                                    size: string;
+                                    price: number;
+                                    colour: string;
+                                    qty: number;
+                                },
+                                index: number
+                            ) => (
+                                <div
+                                    className="cart-item grid grid-cols-[1fr_3fr] border-b-[2px] border-(--primary) m-[5px] p-[10px]"
+                                    key={"item-" + index}
+                                >
+                                    <div className="cart-item-image relative w-[100%] h-[100%] self-center">
+                                        <Image
+                                            src={
+                                                "/items/" +
+                                                item.itemId +
+                                                "/" +
+                                                item.itemId +
+                                                "0.jpg"
+                                            }
+                                            alt={
+                                                "Thumbnail image for " +
+                                                item.name
+                                            }
+                                            fill
+                                            className="object-cover rounded-[10px]"
+                                        />
+                                    </div>
+                                    <div className="item-details px-[10px]">
+                                        <h2 className="item-name">
+                                            {item.name}
+                                        </h2>
+                                        <div className="grid grid-cols-[1fr_1fr] gap-[5px]">
+                                            <p className="item-size">
+                                                Size: {item.size}
+                                            </p>
+                                            <p className="item-colour">
+                                                Colour: {item.colour}
+                                            </p>
+                                        </div>
+
+                                        <div className="grid grid-cols-[1fr_1fr] gap-[5px]">
+                                            <p className="item-price">
+                                                <span className="text-[17px]">
+                                                    R{item.price}
+                                                </span>
+                                            </p>
+                                            <p className="item-qty">
+                                                Qty:{"  "}
+                                                <span className="text-[17px]">
+                                                    {item.qty}
+                                                </span>
+                                            </p>
+                                        </div>
+                                        <p className="item-total">
+                                            Item total:{" "}
+                                            <span className="text-[18px]">
+                                                R{item.price * item.qty}
+                                            </span>
+                                        </p>
+                                    </div>
+                                </div>
+                            )
+                        )}
+                    </>
+                ) : (
+                    <h2 className="text-center">Your cart is empty</h2>
+                )}
+            </div>
+            <h2 className="text-center my-[15px]">Total: R{total}</h2>
         </Body>
     );
 }
