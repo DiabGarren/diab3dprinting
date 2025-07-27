@@ -8,12 +8,30 @@
     --foreground: #171717;
     --primary: #0855c9;
     --primary-dark: #062758;
+    --red: #f54545;
+    --green: #46f277;
+    --grey: #969696;
 }
 
 /* Max width: 375px */
 html {
     background-image: url("/background.svg");
     background-size: 100px;
+}
+
+h1 {
+    font-size: 25px;
+    font-weight: 600;
+}
+
+h2 {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+h3 {
+    font-size: 16px;
+    font-weight: 400;
 }
 
 body {
@@ -73,6 +91,16 @@ button.trash:hover svg path {
     background-color: #46f277;
     width: 100%;
     font-size: 18px;
+}
+
+.item-image-button {
+    background: rgba(70, 70, 70, 0.726);
+    color: white;
+    font-size: 16px;
+    width: 100%;
+    height: 50px;
+    cursor: pointer;
+    border-radius: 5px;
 }
 
 /* Max width: 425px */
