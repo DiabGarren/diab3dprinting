@@ -16,7 +16,6 @@ export interface User {
             size: string;
             price: number;
             colour: string;
-            images: number;
             qty: number;
         }
     ];
