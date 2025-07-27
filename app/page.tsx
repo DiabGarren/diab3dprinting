@@ -101,7 +101,14 @@ export default function Home() {
                         })}
                     </>
                 ) : (
-                    <>No Items</>
+                    <div className="w-[100%] flex justify-center">
+                        <Image
+                            src={"/loading.webp"}
+                            alt={"Loading spinner"}
+                            width={75}
+                            height={75}
+                        />
+                    </div>
                 )}
                 <h2>Printer: {metadata?.printer}</h2>
             </div>

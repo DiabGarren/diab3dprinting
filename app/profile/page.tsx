@@ -2,6 +2,7 @@
 import Body from "@/components/body";
 import { User } from "@/lib/interfaces/user";
 import { Button } from "@heroui/react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -51,18 +52,31 @@ export default function Profile() {
 
     return (
         <Body active="profile" user={user}>
-            <Button
-                className="button-red"
-                onClick={() => {
-                    fetch(process.env.NEXT_PUBLIC_API_URL + "/logout", {
-                        method: "POST",
-                    }).then((res) => {
-                        if (res.status === 200) push("/");
-                    });
-                }}
-            >
-                Logout
-            </Button>
+            {user._id ? (
+                <>
+                    <Button
+                        className="button-red text-white"
+                        onClick={() => {
+                            fetch(process.env.NEXT_PUBLIC_API_URL + "/logout", {
+                                method: "POST",
+                            }).then((res) => {
+                                if (res.status === 200) push("/");
+                            });
+                        }}
+                    >
+                        Logout
+                    </Button>
+                </>
+            ) : (
+                <div className="w-[100%] flex justify-center">
+                    <Image
+                        src={"/loading.webp"}
+                        alt={"Loading spinner"}
+                        width={75}
+                        height={75}
+                    />
+                </div>
+            )}
         </Body>
     );
 }
