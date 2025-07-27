@@ -44,28 +44,33 @@ export async function POST(request: Request) {
         const users = await User.find({});
 
         users.forEach((user) => {
-            if (user.username === body.username && user.email === body.email)
+            if (
+                user.username === body.user.username &&
+                user.email === body.user.email
+            )
                 return createErrorResponse(
                     "Username and Email already exist",
                     406
                 );
 
-            if (user.username === body.username)
+            if (user.username === body.user.username)
                 return createErrorResponse("Username already exists", 406);
 
-            if (user.email === body.email)
+            if (user.email === body.user.email)
                 return createErrorResponse("Email already exists", 406);
         });
 
-        const password = await hash(body.password, 10);
+        console.log(body.user);
+
+        const password = await hash(body.user.password, 10);
 
         const user = await User.create({
-            firstName: body.firstName,
-            lastName: body.lastName,
-            username: body.username,
-            email: body.email,
-            phone: body.phone,
-            prefer: body.prefer,
+            firstName: body.user.firstName,
+            lastName: body.user.lastName,
+            username: body.user.username.toLowerCase(),
+            email: body.user.email.toLowerCase(),
+            phone: body.user.phone,
+            prefer: body.user.prefer,
             password: password,
             level: 1,
             cart: [],
@@ -77,7 +82,7 @@ export async function POST(request: Request) {
             },
         });
 
-        biscuits.set("diab3dprinting", user._id);
+        biscuits.set("diab3dprinting-user", user._id);
         const res = { status: "success", data: user };
 
         return new NextResponse(JSON.stringify(res), {
