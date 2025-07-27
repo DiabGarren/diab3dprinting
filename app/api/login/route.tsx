@@ -14,7 +14,7 @@ export async function POST(request: Request) {
         let user = null;
 
         if (body.username.includes("@"))
-            user = await User.findOne({ email: body.username });
+            user = await User.findOne({ email: body.username.toLowerCase() });
         else if (!body.username.includes("@"))
             user = await User.findOne({
                 username: body.username.toLowerCase(),
