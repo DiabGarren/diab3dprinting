@@ -22,7 +22,6 @@ export default function Checkout() {
                 size: "",
                 price: 0,
                 colour: "",
-                images: 0,
                 qty: 0,
             },
         ],
