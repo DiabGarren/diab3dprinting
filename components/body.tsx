@@ -17,9 +17,9 @@ export default function Body({
     const [nav, setNav] = useState(false);
     return (
         <>
-            <header className="bg-(--primary) h-[90px] grid grid-cols-[75px_1fr_75px] px-[5px]">
+            <header className="bg-(--primary) h-[90px] grid grid-cols-[75px_1fr_75px] px-[5px] items-center">
                 <Link href={"/"}>
-                    <div className="relative w-[100%] h-[100%]">
+                    <div className="relative w-[100%] aspect-[1/1]">
                         <Image
                             src={"/logoGlow.png"}
                             alt={"Logo"}
@@ -28,9 +28,7 @@ export default function Body({
                         />
                     </div>
                 </Link>
-                <h1 className="text-white text-center text-[25px] self-center">
-                    Custom 3D Printing
-                </h1>
+                <h1 className="text-white text-center">Custom 3D Printing</h1>
                 <button
                     className="cursor-pointer"
                     onClick={() => {
