@@ -30,7 +30,6 @@ export default function Home() {
                 size: "",
                 price: 0,
                 colour: "",
-                images: 0,
                 qty: 0,
             },
         ],
