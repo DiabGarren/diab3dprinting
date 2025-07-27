@@ -25,7 +25,7 @@ export default function ItemCard({
     return (
         <Link
             href={"/item/" + item._id}
-            className="border-b-[2px] border-b-(--primary) m-[5px] flex p-[10px]"
+            className="item-card border-b-[2px] border-(--primary) m-[5px] grid grid-cols-[150px_1fr] p-[10px]"
         >
             <div className="relative w-[150px] h-[120px]">
                 <Image
@@ -36,8 +36,8 @@ export default function ItemCard({
                 />
             </div>
 
-            <div className="px-[10px] flex-1">
-                <h2 className="font-[600] text-[16x]">{item.name}</h2>
+            <div className="px-[10px]">
+                <h2>{item.name}</h2>
                 <p className="my-[5px]">
                     <span className="font-[600] text-[16px]">From </span>
                     <span className="font-[700] text-[18px]">
