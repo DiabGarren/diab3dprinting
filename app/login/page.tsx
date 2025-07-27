@@ -1,4 +1,5 @@
 "use client";
+import Back from "@/components/back";
 import Body from "@/components/body";
 import { User } from "@/lib/interfaces/user";
 import { Button, Input } from "@heroui/react";
@@ -53,7 +54,9 @@ export default function Login() {
 
     return (
         <Body active="login" user={user}>
-            <h2>{error}</h2>
+            <Back href="/" />
+            <h1 className="text-center">Log In</h1>
+            <h2 className="text-center text-(--red)">{error}</h2>
             <form
                 onSubmit={async (event) => {
                     event.preventDefault();
@@ -92,7 +95,7 @@ export default function Login() {
                         setUser({ ...user, password: event.target.value })
                     }
                 />
-                <Button type="submit" className="button-green">
+                <Button type="submit" className="button-green mt-[25px]">
                     Log In
                 </Button>
             </form>

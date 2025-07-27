@@ -1,4 +1,5 @@
 "use client";
+import Back from "@/components/back";
 import Body from "@/components/body";
 import { User } from "@/lib/interfaces/user";
 import { Button, Input, Select, SelectItem } from "@heroui/react";
@@ -41,10 +42,14 @@ export default function Register() {
 
     return (
         <Body active="register" user={user}>
-            <h2>{error}</h2>
+            <Back href="/" />
+            <h1 className="text-center">Sign Up</h1>
+            <h2 className="text-center text-(--red)">{error}</h2>
             <form
                 onSubmit={async (event) => {
                     event.preventDefault();
+                    console.log(user);
+
                     if (
                         !user.firstName ||
                         !user.lastName ||
@@ -98,6 +103,7 @@ export default function Register() {
                 <Input
                     type="email"
                     label="Email"
+                    className="mt-[10px]"
                     onChange={(event) => {
                         setUser({ ...user, email: event.target.value });
                     }}
@@ -121,6 +127,7 @@ export default function Register() {
                 <Input
                     type="password"
                     label="Password"
+                    className="mt-[10px]"
                     onChange={(event) =>
                         setUser({ ...user, password: event.target.value })
                     }
@@ -130,7 +137,9 @@ export default function Register() {
                     label="Confirm Password"
                     onChange={(event) => setConfirm(event.target.value)}
                 />
-                <Button type="submit">Sign Up</Button>
+                <Button type="submit" className="button-green mt-[25px]">
+                    Sign Up
+                </Button>
             </form>
         </Body>
     );

@@ -94,7 +94,7 @@ export default function CreateOrder() {
 
     return (
         <Body active="createOrder" user={user}>
-            <Back callback={"/"} />
+            <Back href={"/"} />
 
             <form
                 onSubmit={(event) => {
@@ -120,14 +120,12 @@ export default function CreateOrder() {
                         <Input type="text" label="Phone number" />
                     </>
                 )}
-                <h2>Order</h2>
+                <h2 className="text-center">Order</h2>
                 {order.map((x, index: number) => {
                     return (
                         <div key={index}>
                             <div className="flex items-center justify-center">
-                                <h2 className="text-[18px]">
-                                    Order Item {index + 1}
-                                </h2>
+                                <h3>Order Item {index + 1}</h3>
                                 <button
                                     className="bg-[#f54545] w-[35px] p-[5px] rounded trash cursor-pointer ml-[15px]"
                                     onClick={() => {

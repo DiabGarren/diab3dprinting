@@ -105,11 +105,9 @@ export default function CreateItem() {
 
     return (
         <Body active="createItem" user={user}>
-            <Back callback="/" />
-            <h1 className="text-center text-[25px] font-[500] mb-[15px]">
-                Create Item
-            </h1>
-            <h2>{error}</h2>
+            <Back href="/" />
+            <h1 className="text-center mb-[15px]">Create Item</h1>
+            <h2 className="text-center">{error}</h2>
             <form
                 onSubmit={async (event) => {
                     event.preventDefault();
@@ -198,14 +196,12 @@ export default function CreateItem() {
                         )
                     )}
                 </Select>
-                <h2 className="text-center text-[20px] font-[500]">Options</h2>
+                <h2 className="text-center">Options</h2>
                 {item.options.map((x, index: number) => {
                     return (
                         <div className="my-[5px]" key={index}>
                             <div className="flex items-center justify-center">
-                                <span className="text-[18px]">
-                                    Option {index + 1}
-                                </span>
+                                <h3>Option {index + 1}</h3>
                                 <button
                                     className="bg-[#f54545] w-[35px] p-[5px] rounded trash cursor-pointer ml-[15px]"
                                     onClick={() => {

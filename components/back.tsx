@@ -1,9 +1,9 @@
 import Link from "next/link";
 
-export default function Back({ callback }: { callback: string }) {
+export default function Back({ href }: { href: string }) {
     return (
         <Link
-            href={"/" + callback}
+            href={"/" + href}
             className="flex gap-[2px] items-center hover:underline no-print"
         >
             <svg
