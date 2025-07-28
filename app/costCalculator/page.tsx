@@ -5,7 +5,7 @@ import { User } from "@/lib/interfaces/user";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export default function CostCalc() {
+export default function CostCalcPage() {
     const { push } = useRouter();
     const [user, setUser] = useState<User>({
         _id: "",

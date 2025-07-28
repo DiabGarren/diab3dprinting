@@ -8,7 +8,7 @@ import { User } from "@/lib/interfaces/user";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-export default function Home() {
+export default function HomePage() {
     const [items, setItems] = useState<Item[]>([]);
     const [colours, setColours] = useState<Colour[]>([]);
     const [metadata, setMetadata] = useState<Metadata>();

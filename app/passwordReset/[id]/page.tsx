@@ -3,7 +3,7 @@ import Body from "@/components/body";
 import { User } from "@/lib/interfaces/user";
 import { useState } from "react";
 
-export default function PasswordReset() {
+export default function PasswordResetPage() {
     const [user, setUser] = useState<User>({
         _id: "",
         firstName: "",

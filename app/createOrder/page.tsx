@@ -9,7 +9,7 @@ import { option } from "framer-motion/client";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export default function CreateOrder() {
+export default function CreateOrderPage() {
     const { push } = useRouter();
     const [user, setUser] = useState<User>({
         _id: "",

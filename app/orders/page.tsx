@@ -9,7 +9,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export default function Orders() {
+export default function OrdersPage() {
     const { push } = useRouter();
     const [user, setUser] = useState<User>({
         _id: "",

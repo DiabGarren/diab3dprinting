@@ -7,7 +7,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export default function Login() {
+export default function LoginPage() {
     const { push } = useRouter();
     const [user, setUser] = useState<User>({
         _id: "",

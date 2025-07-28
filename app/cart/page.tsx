@@ -7,7 +7,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export default function Cart() {
+export default function CartPage() {
     const { push } = useRouter();
     const [user, setUser] = useState<User>({
         _id: "",

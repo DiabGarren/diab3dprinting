@@ -7,7 +7,7 @@ import { Button, Input, Select, SelectItem } from "@heroui/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export default function CreateItem() {
+export default function CreateItemPage() {
     const { push } = useRouter();
     const [user, setUser] = useState<User>({
         _id: "",
