@@ -115,55 +115,82 @@ export default function ItemPage({
                     <div className="item-image relative w-[100%] aspect-[3/2] my-[15px]">
                         {item?.images > 0 ? (
                             <>
-                                <div className="absolute h-[100%] w-[50px] z-[99] flex items-center left-[0px]">
-                                    <button
-                                        className="item-image-button"
-                                        onClick={() => {
-                                            if (currImg == 0) {
-                                                setCurrImg(item?.images - 1);
-                                            } else {
-                                                setCurrImg(currImg - 1);
-                                            }
-                                        }}
-                                    >
-                                        {"<"}
-                                    </button>
-                                </div>
-                                {[...new Array(item?.images)].map(
-                                    (x, index: number) => (
-                                        <Image
-                                            key={index}
-                                            src={
-                                                "/items/" +
-                                                item?.itemId +
-                                                "/" +
-                                                item?.itemId +
-                                                index +
-                                                ".jpg"
-                                            }
-                                            alt={"Item image for " + item?.name}
-                                            fill
-                                            className={`object-cover rounded-[10px] ${
-                                                index == currImg ? "" : "hidden"
-                                            }`}
-                                        />
-                                    )
-                                )}
+                                {item?.images == 1 ? (
+                                    <Image
+                                        src={
+                                            "/items/" +
+                                            item?.itemId +
+                                            "/" +
+                                            item?.itemId +
+                                            "0.jpg"
+                                        }
+                                        alt={"Item image for " + item?.name}
+                                        fill
+                                        className={`object-cover rounded-[10px]`}
+                                    />
+                                ) : (
+                                    <>
+                                        <div className="absolute h-[100%] w-[50px] z-[99] flex items-center left-[0px]">
+                                            <button
+                                                className="item-image-button"
+                                                onClick={() => {
+                                                    if (currImg == 0) {
+                                                        setCurrImg(
+                                                            item?.images - 1
+                                                        );
+                                                    } else {
+                                                        setCurrImg(currImg - 1);
+                                                    }
+                                                }}
+                                            >
+                                                {"<"}
+                                            </button>
+                                        </div>
+                                        {[...new Array(item?.images)].map(
+                                            (x, index: number) => (
+                                                <Image
+                                                    key={index}
+                                                    src={
+                                                        "/items/" +
+                                                        item?.itemId +
+                                                        "/" +
+                                                        item?.itemId +
+                                                        index +
+                                                        ".jpg"
+                                                    }
+                                                    alt={
+                                                        "Item image for " +
+                                                        item?.name
+                                                    }
+                                                    fill
+                                                    className={`object-cover rounded-[10px] ${
+                                                        index == currImg
+                                                            ? ""
+                                                            : "hidden"
+                                                    }`}
+                                                />
+                                            )
+                                        )}
 
-                                <div className="absolute h-[100%] w-[50px] z-[99] flex items-center right-[0px]">
-                                    <button
-                                        className="item-image-button"
-                                        onClick={() => {
-                                            if (currImg == item.images - 1) {
-                                                setCurrImg(0);
-                                            } else {
-                                                setCurrImg(currImg + 1);
-                                            }
-                                        }}
-                                    >
-                                        {">"}
-                                    </button>
-                                </div>
+                                        <div className="absolute h-[100%] w-[50px] z-[99] flex items-center right-[0px]">
+                                            <button
+                                                className="item-image-button"
+                                                onClick={() => {
+                                                    if (
+                                                        currImg ==
+                                                        item.images - 1
+                                                    ) {
+                                                        setCurrImg(0);
+                                                    } else {
+                                                        setCurrImg(currImg + 1);
+                                                    }
+                                                }}
+                                            >
+                                                {">"}
+                                            </button>
+                                        </div>
+                                    </>
+                                )}
                             </>
                         ) : (
                             <></>
