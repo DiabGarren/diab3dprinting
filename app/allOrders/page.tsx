@@ -1,4 +1,5 @@
 "use client";
+import Back from "@/components/back";
 import Body from "@/components/body";
 import { User } from "@/lib/interfaces/user";
 import { useRouter } from "next/navigation";
@@ -52,7 +53,7 @@ export default function AllOrders() {
 
     return (
         <Body active="orders" user={user}>
-            <></>
+            <Back href="/" />
         </Body>
     );
 }
