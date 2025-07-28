@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import connectDb from "@/lib/connectDb";
 import { createErrorResponse } from "@/lib/utils";
 import User from "@/models/user";
@@ -5,6 +6,7 @@ import { hash } from "bcrypt";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
+// Get Current Logged In User
 export async function GET() {
     try {
         await connectDb();
@@ -27,12 +29,12 @@ export async function GET() {
             status: 200,
             headers: { "Content-Type": "application/json" },
         });
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
         return createErrorResponse(error.message, 500);
     }
 }
 
+// Register New User
 export async function POST(request: Request) {
     try {
         await connectDb();
@@ -105,7 +107,6 @@ export async function POST(request: Request) {
             status: 201,
             headers: { "Content-Type": "application/json" },
         });
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
         return createErrorResponse(error.message, 500);
     }
