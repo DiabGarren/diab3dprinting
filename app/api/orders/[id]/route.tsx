@@ -20,8 +20,11 @@ export async function GET(
         }
 
         const orders = await Order.find({ userId: user._id });
+        let res = { status: "success", data: orders };
 
-        const res = { status: "success", data: orders };
+        if (orders.length == 0) {
+            res = { status: "success", data: [{ _id: "No Orders" }] };
+        }
 
         return new NextResponse(JSON.stringify(res), {
             status: 201,
