@@ -64,7 +64,6 @@ export default function Register() {
             <form
                 onSubmit={async (event) => {
                     event.preventDefault();
-                    console.log(user);
 
                     if (
                         !user.firstName ||
@@ -76,23 +75,25 @@ export default function Register() {
                         !user.password
                     ) {
                         setError("Please complete the form");
-                    } else {
-                        setError("");
-                        const res = await fetch(
-                            process.env.NEXT_PUBLIC_API_URL + "/user",
-                            {
-                                method: "POST",
-                                body: JSON.stringify({
-                                    user: user,
-                                    confirm: confirm,
-                                }),
-                            }
-                        );
-                        if (res.status === 201) push("/");
-                        const message = await res.json();
-
-                        setError(message.message);
+                        return;
                     }
+                    if (user.password != confirm) {
+                        setError("Passwords do not match");
+                        return;
+                    }
+                    setError("");
+                    fetch(process.env.NEXT_PUBLIC_API_URL + "/user", {
+                        method: "POST",
+                        body: JSON.stringify(user),
+                    }).then(async (res) => {
+                        if (res.status === 201) {
+                            push("/");
+                            return;
+                        }
+                        const data = await res.json();
+                        setError(data.message);
+                        return;
+                    });
                 }}
             >
                 <Input
