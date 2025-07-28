@@ -13,8 +13,10 @@ export async function GET() {
 
         const user = await User.findOne({ _id: userId?.value });
 
-        if (!userId || !userId.value || !user)
+        if (!userId || !userId.value || !user) {
+            biscuits.delete("diab3dprinting-user");
             return createErrorResponse("No user logged in", 406);
+        }
 
         const res = {
             status: "success",
@@ -37,40 +39,54 @@ export async function POST(request: Request) {
         const biscuits = await cookies();
         const body = await request.json();
 
-        if (body.user.password !== body.confirm) {
-            return createErrorResponse("Passwords do not match", 406);
-        }
-
         const users = await User.find({});
+
+        let exisits = { message: "", code: 200 };
 
         users.forEach((user) => {
             if (
-                user.username === body.user.username &&
-                user.email === body.user.email
-            )
-                return createErrorResponse(
-                    "Username and Email already exist",
-                    406
-                );
+                user.username.toLowerCase() === body.username.toLowerCase() &&
+                user.email.toLowerCase() === body.email.toLowerCase()
+            ) {
+                exisits = {
+                    message: "Username and Email already exist",
+                    code: 406,
+                };
+                return;
+            }
 
-            if (user.username === body.user.username)
-                return createErrorResponse("Username already exists", 406);
+            if (user.username.toLowerCase() === body.username.toLowerCase()) {
+                exisits = {
+                    message: "Username already exists",
+                    code: 406,
+                };
+                return;
+            }
 
-            if (user.email === body.user.email)
-                return createErrorResponse("Email already exists", 406);
+            if (user.email.toLowerCase() === body.email.toLowerCase()) {
+                {
+                    exisits = {
+                        message: "Email already exists",
+                        code: 406,
+                    };
+                    return;
+                }
+            }
         });
 
-        console.log(body.user);
+        if (exisits.code != 200) {
+            return createErrorResponse(exisits.message, exisits.code);
+        }
 
-        const password = await hash(body.user.password, 10);
+        const password = await hash(body.password, 10);
 
         const user = await User.create({
-            firstName: body.user.firstName,
-            lastName: body.user.lastName,
-            username: body.user.username.toLowerCase(),
-            email: body.user.email.toLowerCase(),
-            phone: body.user.phone,
-            prefer: body.user.prefer,
+            firstName: body.firstName,
+            lastName: body.lastName,
+            username: body.username.toLowerCase(),
+            email: body.email.toLowerCase(),
+            phone: body.phone,
+            prefer: body.prefer,
             password: password,
             level: 1,
             cart: [],
