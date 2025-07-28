@@ -53,7 +53,7 @@ export default function CheckoutPage() {
 
     return (
         <Body active="cart" user={user}>
-            <Back href="/cart" />
+            <Back href="./cart" />
         </Body>
     );
 }
