@@ -1,4 +1,4 @@
-import Image from "next/image";
+import ImageFallback from "./imageFallback";
 
 export default function OrderItemCard({
     itemId,
@@ -13,12 +13,12 @@ export default function OrderItemCard({
 }) {
     return (
         <div className="order-item">
-            <div className="item-image relative w-[80px] aspect-[1/1]">
-                <Image
+            <div className="item-image relative w-[80px] aspect-[1/1] rounded-[5px] border-[2px] border-(--primary-dark) m-[5px_2px]">
+                <ImageFallback
                     src={"/items/" + itemId + "/" + itemId + "0.jpg"}
                     alt={"Thumbnail image for " + name}
                     fill
-                    className="object-cover"
+                    classes="object-cover rounded-[2px]"
                 />
             </div>
         </div>

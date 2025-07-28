@@ -5,6 +5,7 @@ import OrderItemCard from "@/components/orderItemCard";
 import { Order } from "@/lib/interfaces/order";
 import { User } from "@/lib/interfaces/user";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -76,20 +77,65 @@ export default function Orders() {
                     {orders.map((order: Order, index: number) => {
                         const date = new Date(order.date);
                         return (
-                            <div className="order-card" key={"order-" + index}>
-                                <h2 className="date">
-                                    {date.toLocaleDateString("en-GB", {
-                                        weekday: "short",
-                                        year: "numeric",
-                                        month: "short",
-                                        day: "numeric",
-                                    })}
-                                </h2>
-                                <div className="order-items">
-                                    {order.order.length > 3 ? (
-                                        <>
-                                            {[...new Array(3)].map(
-                                                (item, index) => (
+                            <Link
+                                href={"/orders/" + order._id}
+                                key={"order-" + index}
+                            >
+                                <div className="order-card">
+                                    <h2 className="date">
+                                        {date.toLocaleDateString("en-GB", {
+                                            weekday: "short",
+                                            year: "numeric",
+                                            month: "short",
+                                            day: "numeric",
+                                        })}
+                                    </h2>
+                                    <div className="order-items flex items-center">
+                                        {order.order.length > 3 ? (
+                                            <>
+                                                {[...new Array(3)].map(
+                                                    (item, index) => (
+                                                        <OrderItemCard
+                                                            itemId={
+                                                                order.order[
+                                                                    index
+                                                                ].itemId
+                                                            }
+                                                            name={
+                                                                order.order[
+                                                                    index
+                                                                ].name
+                                                            }
+                                                            price={
+                                                                order.order[
+                                                                    index
+                                                                ].price
+                                                            }
+                                                            qty={
+                                                                order.order[
+                                                                    index
+                                                                ].qty
+                                                            }
+                                                            key={
+                                                                "item-" + index
+                                                            }
+                                                        />
+                                                    )
+                                                )}
+                                                <div className="w-[40px] h-[40px] flex items-center justify-center m-[5px_2px]">
+                                                    <span className="text-[18px]">
+                                                        +{" "}
+                                                        {order.order.length - 3}
+                                                    </span>
+                                                </div>
+                                            </>
+                                        ) : (
+                                            <>
+                                                {[
+                                                    ...new Array(
+                                                        order.order.length
+                                                    ),
+                                                ].map((item, index) => (
                                                     <OrderItemCard
                                                         itemId={
                                                             order.order[index]
@@ -109,38 +155,12 @@ export default function Orders() {
                                                         }
                                                         key={"item-" + index}
                                                     />
-                                                )
-                                            )}
-                                            <div className="w-[80px] aspect-[1/1]">
-                                                + {order.order.length - 3}
-                                            </div>
-                                        </>
-                                    ) : (
-                                        <>
-                                            {[
-                                                ...new Array(
-                                                    order.order.length
-                                                ),
-                                            ].map((item, index) => (
-                                                <OrderItemCard
-                                                    itemId={
-                                                        order.order[index]
-                                                            .itemId
-                                                    }
-                                                    name={
-                                                        order.order[index].name
-                                                    }
-                                                    price={
-                                                        order.order[index].price
-                                                    }
-                                                    qty={order.order[index].qty}
-                                                    key={"item-" + index}
-                                                />
-                                            ))}
-                                        </>
-                                    )}
+                                                ))}
+                                            </>
+                                        )}
+                                    </div>
                                 </div>
-                            </div>
+                            </Link>
                         );
                     })}
                 </div>
