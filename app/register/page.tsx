@@ -3,8 +3,9 @@ import Back from "@/components/back";
 import Body from "@/components/body";
 import { User } from "@/lib/interfaces/user";
 import { Button, Input, Select, SelectItem } from "@heroui/react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Register() {
     const { push } = useRouter();
@@ -38,6 +39,22 @@ export default function Register() {
     });
     const [confirm, setConfirm] = useState("");
     const [error, setError] = useState("");
+
+    useEffect(() => {
+        const getUser = async () => {
+            fetch(process.env.NEXT_PUBLIC_API_URL + "/user")
+                .then((res) => res.json())
+                .then((data) => {
+                    if (data.status === "success") {
+                        setUser(data.data);
+                        if (data.data._id) {
+                            push("/profile");
+                        }
+                    }
+                });
+        };
+        getUser();
+    }, []);
 
     return (
         <Body active="register" user={user}>
@@ -136,6 +153,15 @@ export default function Register() {
                     label="Confirm Password"
                     onChange={(event) => setConfirm(event.target.value)}
                 />
+                <p>
+                    {"Already have an account? "}
+                    <Link
+                        href="/login"
+                        className="text-(--primary) hover:underline"
+                    >
+                        Log In
+                    </Link>
+                </p>
                 <Button type="submit" className="button-green mt-[25px]">
                     Sign Up
                 </Button>

@@ -3,6 +3,7 @@ import Back from "@/components/back";
 import Body from "@/components/body";
 import { User } from "@/lib/interfaces/user";
 import { Button, Input } from "@heroui/react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -45,6 +46,9 @@ export default function Login() {
                 .then((data) => {
                     if (data.status === "success") {
                         setUser(data.data);
+                        if (data.data._id) {
+                            push("/profile");
+                        }
                     }
                 });
         };
@@ -94,6 +98,15 @@ export default function Login() {
                         setUser({ ...user, password: event.target.value })
                     }
                 />
+                <p>
+                    {"Dont't have an account? "}
+                    <Link
+                        href="/register"
+                        className="text-(--primary) hover:underline"
+                    >
+                        Sign Up
+                    </Link>
+                </p>
                 <Button type="submit" className="button-green mt-[25px]">
                     Log In
                 </Button>
