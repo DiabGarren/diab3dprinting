@@ -1,7 +1,10 @@
 "use client";
 import Back from "@/components/back";
 import Body from "@/components/body";
+import OrderItemCard from "@/components/orderItemCard";
+import { Order } from "@/lib/interfaces/order";
 import { User } from "@/lib/interfaces/user";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -36,6 +39,8 @@ export default function Orders() {
         },
     });
 
+    const [orders, setOrders] = useState<[Order] | []>([]);
+
     useEffect(() => {
         const getUser = async () => {
             fetch(process.env.NEXT_PUBLIC_API_URL + "/user")
@@ -43,6 +48,17 @@ export default function Orders() {
                 .then((data) => {
                     if (data.status === "success") {
                         setUser(data.data);
+                        fetch(
+                            process.env.NEXT_PUBLIC_API_URL +
+                                "/orders/" +
+                                data.data._id
+                        )
+                            .then((res) => res.json())
+                            .then((data) => {
+                                if (data.status === "success") {
+                                    setOrders(data.data);
+                                }
+                            });
                         return;
                     }
                     push("/");
@@ -54,6 +70,90 @@ export default function Orders() {
     return (
         <Body active="orders" user={user}>
             <Back href="/" />
+            {orders.length > 0 ? (
+                <div className="orders">
+                    <h1 className="text-center">Orders</h1>
+                    {orders.map((order: Order, index: number) => {
+                        const date = new Date(order.date);
+                        return (
+                            <div className="order-card" key={"order-" + index}>
+                                <h2 className="date">
+                                    {date.toLocaleDateString("en-GB", {
+                                        weekday: "short",
+                                        year: "numeric",
+                                        month: "short",
+                                        day: "numeric",
+                                    })}
+                                </h2>
+                                <div className="order-items">
+                                    {order.order.length > 3 ? (
+                                        <>
+                                            {[...new Array(3)].map(
+                                                (item, index) => (
+                                                    <OrderItemCard
+                                                        itemId={
+                                                            order.order[index]
+                                                                .itemId
+                                                        }
+                                                        name={
+                                                            order.order[index]
+                                                                .name
+                                                        }
+                                                        price={
+                                                            order.order[index]
+                                                                .price
+                                                        }
+                                                        qty={
+                                                            order.order[index]
+                                                                .qty
+                                                        }
+                                                        key={"item-" + index}
+                                                    />
+                                                )
+                                            )}
+                                            <div className="w-[80px] aspect-[1/1]">
+                                                + {order.order.length - 3}
+                                            </div>
+                                        </>
+                                    ) : (
+                                        <>
+                                            {[
+                                                ...new Array(
+                                                    order.order.length
+                                                ),
+                                            ].map((item, index) => (
+                                                <OrderItemCard
+                                                    itemId={
+                                                        order.order[index]
+                                                            .itemId
+                                                    }
+                                                    name={
+                                                        order.order[index].name
+                                                    }
+                                                    price={
+                                                        order.order[index].price
+                                                    }
+                                                    qty={order.order[index].qty}
+                                                    key={"item-" + index}
+                                                />
+                                            ))}
+                                        </>
+                                    )}
+                                </div>
+                            </div>
+                        );
+                    })}
+                </div>
+            ) : (
+                <div className="w-[100%] flex justify-center">
+                    <Image
+                        src={"/loading.webp"}
+                        alt={"Loading spinner"}
+                        width={75}
+                        height={75}
+                    />
+                </div>
+            )}
         </Body>
     );
 }

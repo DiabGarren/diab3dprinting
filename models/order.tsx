@@ -8,12 +8,11 @@ const OrderSchema = new Schema(
         date: String,
         order: [
             {
+                _id: String,
+                itemId: String,
                 name: String,
                 size: String,
                 colour: String,
-                multiColour: Boolean,
-                base: String,
-                image: String,
                 price: Number,
                 qty: Number,
             },
