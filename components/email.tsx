@@ -12,12 +12,14 @@ const transporter = nodemailer.createTransport({
 export async function sendMail({
     email = process.env.GMAIL,
     sendTo,
+    bcc,
     subject,
     body,
     html,
 }: {
     email?: string;
     sendTo?: string;
+    bcc?: string;
     subject?: string;
     body?: string;
     html?: string;
@@ -32,7 +34,7 @@ export async function sendMail({
     const info = await transporter.sendMail({
         from: email,
         to: sendTo,
-        bcc: email,
+        bcc: bcc,
         subject: subject,
         text: body,
         html: html,
