@@ -83,12 +83,13 @@ button.trash:hover svg path {
     stroke: white;
 }
 .button-red {
-    background-color: #f54545;
+    background-color: var(--red);
     width: 100%;
     font-size: 18px;
+    color: white;
 }
 .button-green {
-    background-color: #46f277;
+    background-color: var(--green);
     width: 100%;
     font-size: 18px;
 }
@@ -103,10 +104,36 @@ button.trash:hover svg path {
     border-radius: 5px;
 }
 
+.cart-item {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    border-bottom: 2px solid var(--primary);
+    margin: 5px;
+    padding: 10px;
+
+    .item-details {
+        div:nth-child(3) {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5px;
+        }
+    }
+}
+
 /* Max width: 425px */
 @media only screen and (min-width: 376px) {
     html {
         background-size: 115px;
+    }
+
+    .cart-item {
+        .item-details {
+            div {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 5px;
+            }
+        }
     }
 }
 
