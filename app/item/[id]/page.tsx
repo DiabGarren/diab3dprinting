@@ -1,9 +1,10 @@
 "use client";
 import Back from "@/components/back";
 import Body from "@/components/body";
+import ImageFallback from "@/components/imageFallback";
 import { Item } from "@/lib/interfaces/item";
 import { User } from "@/lib/interfaces/user";
-import { Button, Input, Select } from "@heroui/react";
+import { Button, Input } from "@heroui/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -116,7 +117,7 @@ export default function ItemPage({
                         {item?.images > 0 ? (
                             <>
                                 {item?.images == 1 ? (
-                                    <Image
+                                    <ImageFallback
                                         src={
                                             "/items/" +
                                             item?.itemId +
@@ -148,7 +149,7 @@ export default function ItemPage({
                                         </div>
                                         {[...new Array(item?.images)].map(
                                             (x, index: number) => (
-                                                <Image
+                                                <ImageFallback
                                                     key={index}
                                                     src={
                                                         "/items/" +

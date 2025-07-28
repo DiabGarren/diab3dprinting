@@ -1,7 +1,7 @@
 import { Colour } from "@/lib/interfaces/colour";
 import { Item } from "@/lib/interfaces/item";
-import Image from "next/image";
 import Link from "next/link";
+import ImageFallback from "./imageFallback";
 
 export default function ItemCard({
     item,
@@ -28,7 +28,7 @@ export default function ItemCard({
             className="item-card border-b-[2px] border-(--primary) m-[5px] grid grid-cols-[150px_1fr] p-[10px]"
         >
             <div className="relative w-[150px] h-[120px]">
-                <Image
+                <ImageFallback
                     src={"/items/" + item.itemId + "/" + item.itemId + "0.jpg"}
                     alt={item.name + " thumbnail image"}
                     fill

@@ -8,6 +8,7 @@
     --foreground: #171717;
     --primary: #0855c9;
     --primary-dark: #062758;
+    --primary-light: #83b4ff;
     --red: #f54545;
     --green: #46f277;
     --grey: #969696;
@@ -122,6 +123,18 @@ button.trash:hover svg path {
 
 .order-items {
     display: flex;
+}
+
+.order-card {
+    border-bottom: 2px solid var(--primary);
+    padding: 5px;
+    margin-block: 5px;
+}
+
+.order-card:hover {
+    .date {
+        text-decoration: underline;
+    }
 }
 
 /* Max width: 425px */

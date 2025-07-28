@@ -1,6 +1,7 @@
 "use client";
 import Back from "@/components/back";
 import Body from "@/components/body";
+import ImageFallback from "@/components/imageFallback";
 import { User } from "@/lib/interfaces/user";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -95,7 +96,7 @@ export default function Cart() {
                                             key={"item-" + index}
                                         >
                                             <div className="cart-item-image relative w-[100%] h-[100%] self-center">
-                                                <Image
+                                                <ImageFallback
                                                     src={
                                                         "/items/" +
                                                         item.itemId +

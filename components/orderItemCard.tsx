@@ -18,7 +18,7 @@ export default function OrderItemCard({
                     src={"/items/" + itemId + "/" + itemId + "0.jpg"}
                     alt={"Thumbnail image for " + name}
                     fill
-                    classes="object-cover rounded-[2px]"
+                    className="object-cover rounded-[2px]"
                 />
             </div>
         </div>
