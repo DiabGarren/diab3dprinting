@@ -87,7 +87,7 @@ export default function Cart() {
                                         index: number
                                     ) => (
                                         <div
-                                            className="cart-item grid grid-cols-[1fr_3fr] border-b-[2px] border-(--primary) m-[5px] p-[10px]"
+                                            className="cart-item"
                                             key={"item-" + index}
                                         >
                                             <div className="cart-item-image relative w-[100%] h-[100%] self-center">
@@ -111,7 +111,7 @@ export default function Cart() {
                                                 <h2 className="item-name">
                                                     {item.name}
                                                 </h2>
-                                                <div className="grid grid-cols-[1fr_1fr] gap-[5px]">
+                                                <div>
                                                     <p className="item-size">
                                                         Size: {item.size}
                                                     </p>
@@ -120,7 +120,7 @@ export default function Cart() {
                                                     </p>
                                                 </div>
 
-                                                <div className="grid grid-cols-[1fr_1fr] gap-[5px]">
+                                                <div>
                                                     <p className="item-price">
                                                         <span className="text-[17px]">
                                                             R{item.price}
