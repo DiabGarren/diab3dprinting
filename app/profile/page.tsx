@@ -1,6 +1,7 @@
 "use client";
 import Back from "@/components/back";
 import Body from "@/components/body";
+import Loading from "@/components/loading";
 import { User } from "@/lib/interfaces/user";
 import { Button, Input } from "@heroui/react";
 import Image from "next/image";
@@ -314,14 +315,7 @@ export default function ProfilePage() {
                     </div>
                 </>
             ) : (
-                <div className="w-[100%] flex justify-center">
-                    <Image
-                        src={"/loading.webp"}
-                        alt={"Loading spinner"}
-                        width={75}
-                        height={75}
-                    />
-                </div>
+                <Loading />
             )}
         </Body>
     );

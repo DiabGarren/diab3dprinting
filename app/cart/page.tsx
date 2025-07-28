@@ -2,8 +2,8 @@
 import Back from "@/components/back";
 import Body from "@/components/body";
 import ImageFallback from "@/components/imageFallback";
+import Loading from "@/components/loading";
 import { User } from "@/lib/interfaces/user";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -156,14 +156,7 @@ export default function CartPage() {
                     <h2 className="text-center my-[15px]">Total: R{total}</h2>
                 </>
             ) : (
-                <div className="w-[100%] flex justify-center">
-                    <Image
-                        src={"/loading.webp"}
-                        alt={"Loading spinner"}
-                        width={75}
-                        height={75}
-                    />
-                </div>
+                <Loading />
             )}
         </Body>
     );

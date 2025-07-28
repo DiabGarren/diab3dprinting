@@ -1,6 +1,7 @@
 "use client";
 import Body from "@/components/body";
 import ItemCard from "@/components/itemCard";
+import Loading from "@/components/loading";
 import { Colour } from "@/lib/interfaces/colour";
 import { Item } from "@/lib/interfaces/item";
 import { Metadata } from "@/lib/interfaces/metadata";
@@ -101,14 +102,7 @@ export default function HomePage() {
                         })}
                     </>
                 ) : (
-                    <div className="w-[100%] flex justify-center">
-                        <Image
-                            src={"/loading.webp"}
-                            alt={"Loading spinner"}
-                            width={75}
-                            height={75}
-                        />
-                    </div>
+                    <Loading />
                 )}
                 <h2>Printer: {metadata?.printer}</h2>
             </div>

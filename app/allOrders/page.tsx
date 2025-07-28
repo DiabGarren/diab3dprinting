@@ -1,10 +1,10 @@
 "use client";
 import Back from "@/components/back";
 import Body from "@/components/body";
+import Loading from "@/components/loading";
 import OrderItemCard from "@/components/orderItemCard";
 import { Order } from "@/lib/interfaces/order";
 import { User } from "@/lib/interfaces/user";
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -171,14 +171,7 @@ export default function AllOrdersPage() {
                     })}
                 </div>
             ) : (
-                <div className="w-[100%] flex justify-center">
-                    <Image
-                        src={"/loading.webp"}
-                        alt={"Loading spinner"}
-                        width={75}
-                        height={75}
-                    />
-                </div>
+                <Loading />
             )}
         </Body>
     );
