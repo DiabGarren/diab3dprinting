@@ -87,7 +87,22 @@ export default function Register() {
                         body: JSON.stringify(user),
                     }).then(async (res) => {
                         if (res.status === 201) {
-                            push("/");
+                            fetch(process.env.NEXT_PUBLIC_API_URL + "/email", {
+                                method: "POST",
+                                body: JSON.stringify({
+                                    sendTo: user.email,
+                                    subject: "Account Created",
+                                    html: `<div>
+                                        <h1>You now have a Diab 3D Printing Account</h1>
+                                        <p>Account Successfully created</p>
+                                        <p>Start shopping now   <a href="https://diab3dprinting.vercel.app">Store</a></p>
+                                        <p>View your profile information   <a href="https://diab3dprinting.vercel.app/profile">Profile</a> </p>
+                                    </div>`,
+                                    bcc: "",
+                                }),
+                            }).then((res) => {
+                                if (res.status === 200) push("/");
+                            });
                             return;
                         }
                         const data = await res.json();
