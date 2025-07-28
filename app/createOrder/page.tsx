@@ -6,9 +6,11 @@ import { Item } from "@/lib/interfaces/item";
 import { User } from "@/lib/interfaces/user";
 import { Button, Checkbox, Input, Select, SelectItem } from "@heroui/react";
 import { option } from "framer-motion/client";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function CreateOrder() {
+    const { push } = useRouter();
     const [user, setUser] = useState<User>({
         _id: "",
         firstName: "",
@@ -75,7 +77,9 @@ export default function CreateOrder() {
                 .then((data) => {
                     if (data.status === "success") {
                         setUsers(data.data);
+                        return;
                     }
+                    push("/");
                 });
         };
         const getUser = async () => {

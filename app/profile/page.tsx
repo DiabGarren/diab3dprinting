@@ -48,8 +48,10 @@ export default function Profile() {
                 .then((res) => res.json())
                 .then((data) => {
                     if (data.status === "success") {
-                        return setUser(data.data);
+                        setUser(data.data);
+                        return;
                     }
+                    push("/");
                 });
         };
         getUser();

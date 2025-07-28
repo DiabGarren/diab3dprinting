@@ -95,7 +95,9 @@ export default function CreateItem() {
                 .then((data) => {
                     if (data.status === "success") {
                         setUser(data.data);
+                        return;
                     }
+                    push("/");
                 });
         };
         getProps();
