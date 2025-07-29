@@ -11,6 +11,9 @@
     --primary-light: #83b4ff;
     --red: #f54545;
     --green: #46f277;
+    --print-green: #717610;
+    --print-green-dark: #43460a;
+    --print-yellow: #dfce61;
     --grey: #969696;
 }
 
@@ -134,6 +137,16 @@ button.trash:hover svg path {
 .order-card:hover {
     .date {
         text-decoration: underline;
+    }
+}
+
+@media print {
+    @page {
+        size: A4;
+    }
+    .no-print,
+    .no-print * {
+        display: none !important;
     }
 }
 

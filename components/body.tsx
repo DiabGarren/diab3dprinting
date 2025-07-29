@@ -17,7 +17,7 @@ export default function Body({
     const [nav, setNav] = useState(false);
     return (
         <>
-            <header className="bg-(--primary) h-[90px] grid grid-cols-[75px_1fr_75px] px-[5px] items-center">
+            <header className="bg-(--primary) h-[90px] grid grid-cols-[75px_1fr_75px] px-[5px] items-center no-print">
                 <Link href={"/"}>
                     <div className="relative w-[100%] aspect-[1/1]">
                         <Image
@@ -226,7 +226,7 @@ export default function Body({
                 </ul>
             </nav>
             <main className="mx-auto">{children}</main>
-            <footer></footer>
+            <footer className="no-print"></footer>
         </>
     );
 }
