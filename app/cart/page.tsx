@@ -109,7 +109,7 @@ export default function CartPage() {
                                                         item.name
                                                     }
                                                     fill
-                                                    className="object-cover rounded-[10px]"
+                                                    className="object-cover rounded"
                                                 />
                                             </div>
                                             <div className="item-details px-[10px]">
