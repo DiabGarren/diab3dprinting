@@ -205,18 +205,6 @@ export default function Body({
                                             Create Item
                                         </Link>
                                     </li>
-                                    <li>
-                                        <Link
-                                            href={"/costCalculator"}
-                                            className={
-                                                active == "costCalculator"
-                                                    ? "bg-(--primary-dark)"
-                                                    : ""
-                                            }
-                                        >
-                                            Cost Calculator
-                                        </Link>
-                                    </li>
                                 </>
                             ) : (
                                 <></>
