@@ -97,7 +97,7 @@ export default function CartPage() {
                                             className="cart-item"
                                             key={"item-" + index}
                                         >
-                                            <div className="cart-item-image relative w-[100%] h-[100%] self-center">
+                                            <div className="cart-item-image relative w-[100%] h-[100%] self-center row-[1/3]">
                                                 <Image
                                                     src={
                                                         "/items/" +
@@ -115,10 +115,10 @@ export default function CartPage() {
                                                     className="object-cover rounded"
                                                 />
                                             </div>
-                                            <div className="item-details px-[10px]">
-                                                <h2 className="item-name">
-                                                    {item.name}
-                                                </h2>
+                                            <h2 className="item-name col-[2/4] mx-[5px]">
+                                                {item.name}
+                                            </h2>
+                                            <div className="item-details px-[10px] col-[2/3]">
                                                 <div>
                                                     <p className="item-size">
                                                         Size: {item.size}
@@ -128,7 +128,7 @@ export default function CartPage() {
                                                     </p>
                                                 </div>
 
-                                                <div className="grid grid-cols-[auto_1fr]">
+                                                <div className="mt-[5px] flex gap-[15px] items-center">
                                                     <p className="item-price">
                                                         <span className="text-[17px]">
                                                             R{item.price}
@@ -136,8 +136,8 @@ export default function CartPage() {
                                                     </p>
                                                     <div>
                                                         Qty:{" "}
-                                                        <Input
-                                                            className="item-qty text-[17px] w-[50px] inline-block"
+                                                        <input
+                                                            className="item-qty text-[17px] w-[50px] border-t border-t-[#e9e9e9] border-b-[2px] border-b-[#808080] rounded-[10px] bg-[#f4f4f5] inline-block pl-[5px]"
                                                             type="number"
                                                             value={item.qty.toString()}
                                                             onChange={(
