@@ -8,6 +8,7 @@ export default function ImageFallback(props: {
     width?: number;
     height?: number;
     fill?: boolean;
+    sizes?: string;
     className?: string;
 }) {
     const [imgSrc, setImgSrc] = useState(props.src);
@@ -19,9 +20,6 @@ export default function ImageFallback(props: {
                 width={props.width}
                 height={props.height}
                 className={props.className}
-                onLoadingComplete={(result) => {
-                    if (result.naturalWidth == 0) setImgSrc("/noImage.webp");
-                }}
                 onError={() => setImgSrc("/noImage.webp")}
             />
         );
@@ -31,10 +29,8 @@ export default function ImageFallback(props: {
             src={imgSrc}
             alt={props.alt}
             fill={props.fill}
+            sizes={props.sizes}
             className={props.className}
-            onLoadingComplete={(result) => {
-                if (result.naturalWidth == 0) setImgSrc("/noImage.webp");
-            }}
             onError={() => setImgSrc("/noImage.webp")}
         />
     );

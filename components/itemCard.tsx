@@ -32,6 +32,7 @@ export default function ItemCard({
                     src={"/items/" + item.itemId + "/" + item.itemId + "0.jpg"}
                     alt={item.name + " thumbnail image"}
                     fill
+                    sizes="150px"
                     className="object-cover rounded"
                 />
             </div>

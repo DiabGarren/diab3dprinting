@@ -24,6 +24,7 @@ export default function Body({
                             src={"/logoGlow.png"}
                             alt={"Logo"}
                             fill
+                            sizes="75px"
                             className="object-contain"
                         />
                     </div>
