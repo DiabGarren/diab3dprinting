@@ -263,12 +263,12 @@ export default function ItemPage({
                             type="number"
                             className="w-[80px]"
                             value={choice.qty.toString()}
-                            onChange={(event) =>
+                            onChange={(event) => {
                                 setChoice({
                                     ...choice,
                                     qty: parseInt(event.target.value),
-                                })
-                            }
+                                });
+                            }}
                         />
                     </div>
                     <h2 className="text-(--red) text-center">

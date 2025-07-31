@@ -65,7 +65,7 @@ export async function PUT(request: Request) {
                 size: body.size,
                 price: body.price,
                 colour: body.colour,
-                qty: 1,
+                qty: body.qty,
             });
         }
 
