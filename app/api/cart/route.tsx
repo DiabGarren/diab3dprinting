@@ -46,27 +46,34 @@ export async function PUT(request: Request) {
         const body = await request.json();
 
         const user = await User.findOne({ _id: userId?.value });
-        const cart = JSON.parse(JSON.stringify(user)).cart;
+        let cart = JSON.parse(JSON.stringify(user)).cart;
 
         const existing = cart.findIndex(
             (item: any) =>
-                item.name === body.name &&
-                item.size === body.size &&
-                item.colour === body.colour
+                item.name === body.cart.name &&
+                item.size === body.cart.size &&
+                item.colour === body.cart.colour
         );
-
-        if (existing > -1) {
-            cart[existing].qty++;
+        if (body.add == true) {
+            if (existing > -1) {
+                cart[existing].qty += body.qty;
+            } else {
+                cart.push({
+                    _id: body.cart._id,
+                    itemId: body.cart.itemId,
+                    name: body.cart.name,
+                    size: body.cart.size,
+                    price: body.cart.price,
+                    colour: body.cart.colour,
+                    qty: body.cart.qty,
+                });
+            }
         } else {
-            cart.push({
-                _id: body._id,
-                itemId: body.itemId,
-                name: body.name,
-                size: body.size,
-                price: body.price,
-                colour: body.colour,
-                qty: body.qty,
-            });
+            if (body.qty) {
+                cart[existing].qty = body.qty;
+            } else {
+                cart = body.cart;
+            }
         }
 
         await User.updateOne({ _id: user._id }, { cart: cart });

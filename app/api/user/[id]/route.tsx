@@ -49,20 +49,22 @@ export async function PUT(
         const newUser = await User.updateOne(
             { _id: id },
             {
-                firstName: body.firstName,
-                lastName: body.lastName,
-                username: body.username.toLowerCase(),
-                email: body.email.toLowerCase(),
-                phone: body.phone,
-                prefer: body.prefer,
-                password: body.password,
-                level: body.level,
-                cart: body.cart,
-                address: {
-                    street: body.address.street,
-                    suburb: body.address.suburb,
-                    city: body.address.city,
-                    postalCode: body.address.postalCode,
+                $set: {
+                    firstName: body.firstName,
+                    lastName: body.lastName,
+                    username: body.username.toLowerCase(),
+                    email: body.email.toLowerCase(),
+                    phone: body.phone,
+                    prefer: body.prefer,
+                    password: body.password,
+                    level: body.level,
+                    cart: body.cart,
+                    address: {
+                        street: body.address.street,
+                        suburb: body.address.suburb,
+                        city: body.address.city,
+                        postalCode: body.address.postalCode,
+                    },
                 },
             }
         );

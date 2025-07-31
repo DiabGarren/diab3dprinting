@@ -309,7 +309,11 @@ export default function ItemPage({
                             }
                             fetch(process.env.NEXT_PUBLIC_API_URL + "/cart/", {
                                 method: "PUT",
-                                body: JSON.stringify(choice),
+                                body: JSON.stringify({
+                                    cart: choice,
+                                    add: true,
+                                    qty: choice.qty,
+                                }),
                             }).then((res) => {
                                 if (res.status === 201) {
                                     setAdded(true);
