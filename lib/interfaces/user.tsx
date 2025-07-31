@@ -8,17 +8,27 @@ export interface User {
     prefer: string;
     password: string;
     level: number;
-    cart: [
-        {
-            _id: string;
-            itemId: string;
-            name: string;
-            size: string;
-            price: number;
-            colour: string;
-            qty: number;
-        }
-    ];
+    cart:
+        | [
+              {
+                  _id: string;
+                  itemId: string;
+                  name: string;
+                  size: string;
+                  price: number;
+                  colour: string;
+                  qty: number;
+              }
+          ]
+        | {
+              _id: string;
+              itemId: string;
+              name: string;
+              size: string;
+              price: number;
+              colour: string;
+              qty: number;
+          }[];
     address: {
         street: string;
         suburb: string;
