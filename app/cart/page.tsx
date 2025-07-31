@@ -4,6 +4,8 @@ import Body from "@/components/body";
 import ImageFallback from "@/components/imageFallback";
 import Loading from "@/components/loading";
 import { User } from "@/lib/interfaces/user";
+import { Input } from "@heroui/react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -96,7 +98,7 @@ export default function CartPage() {
                                             key={"item-" + index}
                                         >
                                             <div className="cart-item-image relative w-[100%] h-[100%] self-center">
-                                                <ImageFallback
+                                                <Image
                                                     src={
                                                         "/items/" +
                                                         item.itemId +
@@ -109,6 +111,7 @@ export default function CartPage() {
                                                         item.name
                                                     }
                                                     fill
+                                                    sizes="150px"
                                                     className="object-cover rounded"
                                                 />
                                             </div>
@@ -125,18 +128,92 @@ export default function CartPage() {
                                                     </p>
                                                 </div>
 
-                                                <div>
+                                                <div className="grid grid-cols-[auto_1fr]">
                                                     <p className="item-price">
                                                         <span className="text-[17px]">
                                                             R{item.price}
                                                         </span>
                                                     </p>
-                                                    <p className="item-qty">
-                                                        Qty:{"  "}
-                                                        <span className="text-[17px]">
-                                                            {item.qty}
-                                                        </span>
-                                                    </p>
+                                                    <div>
+                                                        Qty:{" "}
+                                                        <Input
+                                                            className="item-qty text-[17px] w-[50px] inline-block"
+                                                            type="number"
+                                                            value={item.qty.toString()}
+                                                            onChange={(
+                                                                event
+                                                            ) => {
+                                                                const newCart =
+                                                                    [
+                                                                        ...user.cart,
+                                                                    ];
+
+                                                                if (
+                                                                    parseInt(
+                                                                        event
+                                                                            .target
+                                                                            .value
+                                                                    ) <= 0
+                                                                ) {
+                                                                    newCart.splice(
+                                                                        index,
+                                                                        1
+                                                                    );
+                                                                } else {
+                                                                    newCart[
+                                                                        index
+                                                                    ].qty =
+                                                                        parseInt(
+                                                                            event
+                                                                                .target
+                                                                                .value
+                                                                        );
+                                                                }
+
+                                                                fetch(
+                                                                    process.env
+                                                                        .NEXT_PUBLIC_API_URL +
+                                                                        "/cart",
+                                                                    {
+                                                                        method: "PUT",
+                                                                        body: JSON.stringify(
+                                                                            {
+                                                                                cart: newCart,
+                                                                                add: false,
+                                                                            }
+                                                                        ),
+                                                                    }
+                                                                ).then(
+                                                                    (res) => {
+                                                                        if (
+                                                                            res.status ===
+                                                                            201
+                                                                        ) {
+                                                                            setUser(
+                                                                                {
+                                                                                    ...user,
+                                                                                    cart: newCart,
+                                                                                }
+                                                                            );
+                                                                            let total = 0;
+                                                                            newCart.forEach(
+                                                                                (
+                                                                                    item
+                                                                                ) => {
+                                                                                    total +=
+                                                                                        item.price *
+                                                                                        item.qty;
+                                                                                }
+                                                                            );
+                                                                            setTotal(
+                                                                                total
+                                                                            );
+                                                                        }
+                                                                    }
+                                                                );
+                                                            }}
+                                                        />
+                                                    </div>
                                                 </div>
                                                 <p className="item-total">
                                                     Item total:{" "}
@@ -145,6 +222,54 @@ export default function CartPage() {
                                                     </span>
                                                 </p>
                                             </div>
+                                            <button
+                                                className="flex button-red cursor-pointer relative aspect-[1/1] p-[px] rounded items-center justify-center self-center"
+                                                onClick={() => {
+                                                    const newCart = [
+                                                        ...user.cart,
+                                                    ];
+                                                    newCart.splice(index, 1);
+                                                    fetch(
+                                                        process.env
+                                                            .NEXT_PUBLIC_API_URL +
+                                                            "/cart",
+                                                        {
+                                                            method: "PUT",
+                                                            body: JSON.stringify(
+                                                                {
+                                                                    cart: newCart,
+                                                                    add: false,
+                                                                }
+                                                            ),
+                                                        }
+                                                    ).then((res) => {
+                                                        if (
+                                                            res.status === 201
+                                                        ) {
+                                                            setUser({
+                                                                ...user,
+                                                                cart: newCart,
+                                                            });
+                                                            let total = 0;
+                                                            newCart.forEach(
+                                                                (item) => {
+                                                                    total +=
+                                                                        item.price *
+                                                                        item.qty;
+                                                                }
+                                                            );
+                                                            setTotal(total);
+                                                        }
+                                                    });
+                                                }}
+                                            >
+                                                <ImageFallback
+                                                    src={"/trash.svg"}
+                                                    alt="Trash Icon"
+                                                    width={25}
+                                                    height={25}
+                                                />
+                                            </button>
                                         </div>
                                     )
                                 )}

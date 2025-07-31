@@ -118,8 +118,9 @@ button.trash:hover svg path {
     .item-details {
         div:nth-child(3) {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 5px;
+            grid-template-columns: auto 1fr;
+            gap: 15px;
+            align-items: center;
         }
     }
 }
