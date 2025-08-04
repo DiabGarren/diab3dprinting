@@ -3,13 +3,9 @@ import ImageFallback from "./imageFallback";
 export default function OrderItemCard({
     itemId,
     name,
-    price,
-    qty,
 }: {
     itemId: string;
     name: string;
-    price: number;
-    qty: number;
 }) {
     return (
         <div className="order-item">

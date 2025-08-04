@@ -2,12 +2,13 @@
 import Back from "@/components/back";
 import Body from "@/components/body";
 import Loading from "@/components/loading";
-import OrderItemCard from "@/components/orderItemCard";
+import CartItemCard from "@/components/cartItemCard";
 import { Order } from "@/lib/interfaces/order";
 import { User } from "@/lib/interfaces/user";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import OrderItemCard from "@/components/orderItemCard";
 
 export default function OrdersPage() {
     const { push } = useRouter();
@@ -117,18 +118,6 @@ export default function OrdersPage() {
                                                                             index
                                                                         ].name
                                                                     }
-                                                                    price={
-                                                                        order
-                                                                            .order[
-                                                                            index
-                                                                        ].price
-                                                                    }
-                                                                    qty={
-                                                                        order
-                                                                            .order[
-                                                                            index
-                                                                        ].qty
-                                                                    }
                                                                     key={
                                                                         "item-" +
                                                                         index
@@ -161,16 +150,6 @@ export default function OrdersPage() {
                                                                     order.order[
                                                                         index
                                                                     ].name
-                                                                }
-                                                                price={
-                                                                    order.order[
-                                                                        index
-                                                                    ].price
-                                                                }
-                                                                qty={
-                                                                    order.order[
-                                                                        index
-                                                                    ].qty
                                                                 }
                                                                 key={
                                                                     "item-" +

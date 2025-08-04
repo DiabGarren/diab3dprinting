@@ -112,16 +112,6 @@ export default function AllOrdersPage() {
                                                                     index
                                                                 ].name
                                                             }
-                                                            price={
-                                                                order.order[
-                                                                    index
-                                                                ].price
-                                                            }
-                                                            qty={
-                                                                order.order[
-                                                                    index
-                                                                ].qty
-                                                            }
                                                             key={
                                                                 "item-" + index
                                                             }
@@ -150,14 +140,6 @@ export default function AllOrdersPage() {
                                                         name={
                                                             order.order[index]
                                                                 .name
-                                                        }
-                                                        price={
-                                                            order.order[index]
-                                                                .price
-                                                        }
-                                                        qty={
-                                                            order.order[index]
-                                                                .qty
                                                         }
                                                         key={"item-" + index}
                                                     />
