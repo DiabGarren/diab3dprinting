@@ -3,6 +3,7 @@ import Back from "@/components/back";
 import Body from "@/components/body";
 import ImageFallback from "@/components/imageFallback";
 import Loading from "@/components/loading";
+import CartItemCard from "@/components/cartItemCard";
 import { Order } from "@/lib/interfaces/order";
 import { User } from "@/lib/interfaces/user";
 import { Button } from "@heroui/react";
@@ -85,31 +86,8 @@ export default function OrderPage({
                             })}
                         </h2>
                         {order.order.map((item, index: number) => (
-                            <div
-                                className="grid grid-cols-[120px_2fr] p-[10px] border-b-[2px] border-(--primary)"
-                                key={"order-" + index}
-                            >
-                                <div className="order-item-image relative w-[120px] h-[100%]">
-                                    <ImageFallback
-                                        src={
-                                            "/items/" +
-                                            item.itemId +
-                                            "/" +
-                                            item.itemId +
-                                            "0.jpg"
-                                        }
-                                        alt={"Thumbnail image for " + item.name}
-                                        fill
-                                        className="object-cover rounded"
-                                    />
-                                </div>
-                                <div className="order-item-details px-[10px]">
-                                    <h2>{item.name}</h2>
-                                    <p>{item.size}</p>
-                                    <p>{item.colour}</p>
-                                    <p>R{item.price}</p>
-                                    <p>Qty: {item.qty}</p>
-                                </div>
+                            <div className="cart-item" key={"item-" + index}>
+                                <CartItemCard {...item} />
                             </div>
                         ))}
 

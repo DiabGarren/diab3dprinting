@@ -4,7 +4,7 @@ import Back from "@/components/back";
 import Body from "@/components/body";
 import ImageFallback from "@/components/imageFallback";
 import Loading from "@/components/loading";
-import OrderItemCard from "@/components/orderItemCard";
+import CartItemCard from "@/components/cartItemCard";
 import { User } from "@/lib/interfaces/user";
 import { Button } from "@heroui/react";
 import Image from "next/image";
@@ -269,12 +269,7 @@ export default function CartPage() {
                                                         </button>
                                                     </>
                                                 ) : (
-                                                    <OrderItemCard
-                                                        itemId={item.itemId}
-                                                        name={item.name}
-                                                        price={item.price}
-                                                        qty={item.qty}
-                                                    />
+                                                    <CartItemCard {...item} />
                                                 )}
                                             </div>
                                         );
