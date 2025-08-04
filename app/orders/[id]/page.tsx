@@ -72,10 +72,12 @@ export default function OrderPage({
 
     return (
         <Body active="order" user={user}>
-            <Back href={user.level == 2 ? "./allOrders" : "./orders"} />
+            <div className="order">
+                <Back href={user.level == 2 ? "./allOrders" : "./orders"} />
+            </div>
             {order ? (
-                <div className="order">
-                    <div className="no-print">
+                <>
+                    <div className="order-info no-print">
                         <h1 className="text-center">Order Details</h1>
                         <h2>
                             {new Date(order.date).toLocaleDateString("en-GB", {
@@ -213,7 +215,7 @@ export default function OrderPage({
                             </div>
                         </div>
                     </div>
-                </div>
+                </>
             ) : (
                 <Loading />
             )}

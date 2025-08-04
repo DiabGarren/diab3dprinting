@@ -79,7 +79,7 @@ export default function HomePage() {
 
     return (
         <Body active="home" user={user}>
-            <div className="relative h-[180px] w-[calc(100%+20px)] mx-[-10px]">
+            <div className="hero-image relative h-[180px] w-[100%]">
                 <Image
                     src={"/hero.jpg"}
                     alt={"Hero Image"}

@@ -25,9 +25,9 @@ export default function ItemCard({
     return (
         <Link
             href={"/item/" + item._id}
-            className="item-card border-b-[2px] border-(--primary) m-[5px] grid grid-cols-[150px_1fr] p-[10px]"
+            className="item-card border-b-[2px] border-(--primary) m-[5px] grid grid-cols-[auto_1fr] p-[10px]"
         >
-            <div className="relative w-[150px] h-[120px]">
+            <div className="item-image relative">
                 <ImageFallback
                     src={"/items/" + item.itemId + "/" + item.itemId + "0.jpg"}
                     alt={item.name + " thumbnail image"}
@@ -37,7 +37,7 @@ export default function ItemCard({
                 />
             </div>
 
-            <div className="px-[10px]">
+            <div className="item-details px-[10px]">
                 <h2>{item.name}</h2>
                 <p className="my-[5px]">
                     <span className="font-[600] text-[16px]">From </span>

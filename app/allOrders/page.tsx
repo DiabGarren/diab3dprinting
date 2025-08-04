@@ -75,32 +75,66 @@ export default function AllOrdersPage() {
 
     return (
         <Body active="allOrders" user={user}>
-            <Back href="/" />
-            {orders.length > 0 ? (
-                <div className="orders">
-                    <h1 className="text-center">All Orders</h1>
-                    {orders.map((order: Order, index: number) => {
-                        const date = new Date(order.date);
-                        return (
-                            <Link
-                                href={"/orders/" + order._id}
-                                key={"order-" + index}
-                            >
-                                <div className="order-card">
-                                    <h2 className="date">
-                                        {date.toLocaleDateString("en-GB", {
-                                            weekday: "short",
-                                            year: "numeric",
-                                            month: "short",
-                                            day: "numeric",
-                                        })}
-                                    </h2>
-                                    <h3>Ordered by: {order.name}</h3>
-                                    <div className="order-items flex items-center">
-                                        {order.order.length > 3 ? (
-                                            <>
-                                                {[...new Array(3)].map(
-                                                    (item, index) => (
+            <div className="orders">
+                <Back href="/" />
+                {orders.length > 0 ? (
+                    <>
+                        <h1 className="text-center">All Orders</h1>
+                        {orders.map((order: Order, index: number) => {
+                            const date = new Date(order.date);
+                            return (
+                                <Link
+                                    href={"/orders/" + order._id}
+                                    key={"order-" + index}
+                                >
+                                    <div className="order-card">
+                                        <h2 className="date">
+                                            {date.toLocaleDateString("en-GB", {
+                                                weekday: "short",
+                                                year: "numeric",
+                                                month: "short",
+                                                day: "numeric",
+                                            })}
+                                        </h2>
+                                        <h3>Ordered by: {order.name}</h3>
+                                        <div className="order-items flex items-center">
+                                            {order.order.length > 3 ? (
+                                                <>
+                                                    {[...new Array(3)].map(
+                                                        (item, index) => (
+                                                            <OrderItemCard
+                                                                itemId={
+                                                                    order.order[
+                                                                        index
+                                                                    ].itemId
+                                                                }
+                                                                name={
+                                                                    order.order[
+                                                                        index
+                                                                    ].name
+                                                                }
+                                                                key={
+                                                                    "item-" +
+                                                                    index
+                                                                }
+                                                            />
+                                                        )
+                                                    )}
+                                                    <div className="w-[40px] h-[40px] flex items-center justify-center m-[5px_2px]">
+                                                        <span className="text-[18px]">
+                                                            +{" "}
+                                                            {order.order
+                                                                .length - 3}
+                                                        </span>
+                                                    </div>
+                                                </>
+                                            ) : (
+                                                <>
+                                                    {[
+                                                        ...new Array(
+                                                            order.order.length
+                                                        ),
+                                                    ].map((item, index) => (
                                                         <OrderItemCard
                                                             itemId={
                                                                 order.order[
@@ -116,45 +150,19 @@ export default function AllOrdersPage() {
                                                                 "item-" + index
                                                             }
                                                         />
-                                                    )
-                                                )}
-                                                <div className="w-[40px] h-[40px] flex items-center justify-center m-[5px_2px]">
-                                                    <span className="text-[18px]">
-                                                        +{" "}
-                                                        {order.order.length - 3}
-                                                    </span>
-                                                </div>
-                                            </>
-                                        ) : (
-                                            <>
-                                                {[
-                                                    ...new Array(
-                                                        order.order.length
-                                                    ),
-                                                ].map((item, index) => (
-                                                    <OrderItemCard
-                                                        itemId={
-                                                            order.order[index]
-                                                                .itemId
-                                                        }
-                                                        name={
-                                                            order.order[index]
-                                                                .name
-                                                        }
-                                                        key={"item-" + index}
-                                                    />
-                                                ))}
-                                            </>
-                                        )}
+                                                    ))}
+                                                </>
+                                            )}
+                                        </div>
                                     </div>
-                                </div>
-                            </Link>
-                        );
-                    })}
-                </div>
-            ) : (
-                <Loading />
-            )}
+                                </Link>
+                            );
+                        })}
+                    </>
+                ) : (
+                    <Loading />
+                )}
+            </div>
         </Body>
     );
 }

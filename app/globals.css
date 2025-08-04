@@ -73,7 +73,7 @@ nav {
 }
 
 main {
-    margin: 30px 10px;
+    margin: 30px 0;
 }
 
 div[data-slot="input-wrapper"],
@@ -96,6 +96,12 @@ button.trash:hover svg path {
     background-color: var(--green);
     width: 100%;
     font-size: 18px;
+}
+
+.item-card {
+    .item-image {
+        width: 120px;
+    }
 }
 
 .item-image-button {
@@ -188,6 +194,25 @@ button.trash:hover svg path {
     html {
         background-size: 150px;
     }
+
+    .item-card {
+        .item-image {
+            width: 150px;
+        }
+    }
+
+    div.items,
+    div.cart,
+    div.profile,
+    div.item,
+    div.orders,
+    div.order,
+    div.order-info,
+    div.create {
+        max-width: 475px;
+        margin-inline: auto;
+    }
+
     .cart-item {
         .item-details > div {
             display: grid;
