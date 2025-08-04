@@ -28,7 +28,8 @@ export interface User {
               price: number;
               colour: string;
               qty: number;
-          }[];
+          }[]
+        | [];
     address: {
         street: string;
         suburb: string;
