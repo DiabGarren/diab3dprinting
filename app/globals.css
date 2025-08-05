@@ -229,6 +229,7 @@ button.trash:hover svg path {
     div.register,
     div.password-reset {
         max-width: 475px;
+        width: 95%;
         margin-inline: auto;
     }
 
