@@ -76,7 +76,7 @@ export default function AllOrdersPage() {
     return (
         <Body active="allOrders" user={user}>
             <div className="orders">
-                <Back href="/" />
+                <Back href="" />
                 {orders.length > 0 ? (
                     <>
                         <h1 className="text-center">All Orders</h1>

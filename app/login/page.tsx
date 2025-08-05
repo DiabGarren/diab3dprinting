@@ -57,60 +57,70 @@ export default function LoginPage() {
 
     return (
         <Body active="login" user={user}>
-            <Back href="/" />
-            <h1 className="text-center">Log In</h1>
-            <h2 className="text-center text-(--red)">{error}</h2>
-            <form
-                onSubmit={async (event) => {
-                    event.preventDefault();
-                    if (!user.username || !user.password) {
-                        setError("Please complete the form");
-                    } else {
-                        setError("");
-                        const res = await fetch(
-                            process.env.NEXT_PUBLIC_API_URL + "/login",
-                            {
-                                method: "POST",
-                                body: JSON.stringify({
-                                    username: user.username,
-                                    password: user.password,
-                                }),
-                            }
-                        );
-                        if (res.status === 200) push("/");
-                        const message = await res.json();
+            <div className="login">
+                <Back href="" />
+                <h1 className="text-center">Log In</h1>
+                <h2 className="text-center text-(--red)">{error}</h2>
+                <form
+                    onSubmit={async (event) => {
+                        event.preventDefault();
+                        if (!user.username || !user.password) {
+                            setError("Please complete the form");
+                        } else {
+                            setError("");
+                            const res = await fetch(
+                                process.env.NEXT_PUBLIC_API_URL + "/login",
+                                {
+                                    method: "POST",
+                                    body: JSON.stringify({
+                                        username: user.username,
+                                        password: user.password,
+                                    }),
+                                }
+                            );
+                            if (res.status === 200) push("/");
+                            const message = await res.json();
 
-                        setError(message.message);
-                    }
-                }}
-            >
-                <Input
-                    label="Username/Email"
-                    type="text"
-                    onChange={(event) =>
-                        setUser({ ...user, username: event.target.value })
-                    }
-                />
-                <Input
-                    label="Password"
-                    type="password"
-                    onChange={(event) =>
-                        setUser({ ...user, password: event.target.value })
-                    }
-                />
-                <p>
-                    {"Dont't have an account? "}
-                    <Link
-                        href="/register"
-                        className="text-(--primary) hover:underline"
-                    >
-                        Sign Up
-                    </Link>
-                </p>
-                <Button type="submit" className="button-green mt-[25px]">
-                    Log In
-                </Button>
-            </form>
+                            setError(message.message);
+                        }
+                    }}
+                >
+                    <Input
+                        label="Username/Email"
+                        type="text"
+                        onChange={(event) =>
+                            setUser({ ...user, username: event.target.value })
+                        }
+                    />
+                    <Input
+                        label="Password"
+                        type="password"
+                        onChange={(event) =>
+                            setUser({ ...user, password: event.target.value })
+                        }
+                    />
+                    <p>
+                        <Link
+                            href="/passwordReset"
+                            className="text-(--primary) hover:underline"
+                        >
+                            Forgot password
+                        </Link>
+                    </p>
+                    <Button type="submit" className="button-green mt-[15px]">
+                        Log In
+                    </Button>
+                    <p>
+                        {"Don't have an account? "}
+                        <Link
+                            href="/register"
+                            className="text-(--primary) hover:underline"
+                        >
+                            Sign Up
+                        </Link>
+                    </p>
+                </form>
+            </div>
         </Body>
     );
 }

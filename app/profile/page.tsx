@@ -61,7 +61,7 @@ export default function ProfilePage() {
     return (
         <Body active="profile" user={user}>
             <div className="profile">
-                <Back href="/" />
+                <Back href="" />
                 {user._id ? (
                     <>
                         <h1 className="text-center">
@@ -119,7 +119,7 @@ export default function ProfilePage() {
                                     <p>
                                         Looking for{" "}
                                         <Link
-                                            href={"/passwordReset/" + user._id}
+                                            href={"/passwordReset/"}
                                             className="text-(--primary) hover:underline"
                                         >
                                             Reset Password

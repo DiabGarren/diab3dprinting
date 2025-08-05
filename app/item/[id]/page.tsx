@@ -110,7 +110,7 @@ export default function ItemPage({
     return (
         <Body active="" user={user}>
             <div className="item">
-                <Back href="/" />
+                <Back href="" />
                 {item.name ? (
                     <>
                         <h1 className="text-center">{item?.name}</h1>

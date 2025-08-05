@@ -10,6 +10,7 @@ import { Button } from "@heroui/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 export default function CartPage() {
     const { push } = useRouter();
@@ -78,7 +79,7 @@ export default function CartPage() {
     return (
         <Body active="cart" user={user}>
             <div className="cart">
-                <Back href="/" />
+                <Back href="" />
                 <div className="flex items-center mx-auto w-[100px]">
                     <h1 className="text-center">Cart</h1>
                     <button
@@ -358,6 +359,9 @@ export default function CartPage() {
                         ) : (
                             <></>
                         )}
+                        <Button className="button-green">
+                            <Link href="/checkout">Checkout</Link>
+                        </Button>
                     </>
                 ) : (
                     <Loading />

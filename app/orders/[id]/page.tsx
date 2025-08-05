@@ -73,7 +73,7 @@ export default function OrderPage({
     return (
         <Body active="order" user={user}>
             <div className="order">
-                <Back href={user.level == 2 ? "./allOrders" : "./orders"} />
+                <Back href={user.level == 2 ? "allOrders" : "orders"} />
             </div>
             {order ? (
                 <>

@@ -53,7 +53,10 @@ export default function CheckoutPage() {
 
     return (
         <Body active="cart" user={user}>
-            <Back href="./cart" />
+            <div className="checkout">
+                <Back href="cart" />
+                <h1 className="text-center">Checkout</h1>
+            </div>
         </Body>
     );
 }

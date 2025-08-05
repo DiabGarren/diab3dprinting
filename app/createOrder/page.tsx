@@ -98,7 +98,7 @@ export default function CreateOrderPage() {
     return (
         <Body active="createOrder" user={user}>
             <div className="create">
-                <Back href="/" />
+                <Back href="" />
 
                 <form
                     onSubmit={(event) => {

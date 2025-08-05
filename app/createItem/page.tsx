@@ -107,7 +107,7 @@ export default function CreateItemPage() {
     return (
         <Body active="createItem" user={user}>
             <div className="create">
-                <Back href="/" />
+                <Back href="" />
                 <h1 className="text-center mb-[15px]">Create Item</h1>
                 <h2 className="text-center">{error}</h2>
                 <form

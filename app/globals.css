@@ -76,6 +76,21 @@ main {
     margin: 30px 0;
 }
 
+div.items,
+div.cart,
+div.checkout,
+div.profile,
+div.item,
+div.orders,
+div.order,
+div.order-info,
+div.create,
+div.login,
+div.register,
+div.password-reset {
+    margin-inline: 10px;
+}
+
 div[data-slot="input-wrapper"],
 button[data-slot="trigger"] {
     margin-block: 5px;
@@ -203,12 +218,16 @@ button.trash:hover svg path {
 
     div.items,
     div.cart,
+    div.checkout,
     div.profile,
     div.item,
     div.orders,
     div.order,
     div.order-info,
-    div.create {
+    div.create,
+    div.login,
+    div.register,
+    div.password-reset {
         max-width: 475px;
         margin-inline: auto;
     }
