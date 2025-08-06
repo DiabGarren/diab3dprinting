@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 import Back from "@/components/back";
 import Body from "@/components/body";
@@ -6,7 +5,14 @@ import ImageFallback from "@/components/imageFallback";
 import Loading from "@/components/loading";
 import { Item } from "@/lib/interfaces/item";
 import { User } from "@/lib/interfaces/user";
-import { Button, Checkbox, Input, Select, SelectItem } from "@heroui/react";
+import {
+    Button,
+    Checkbox,
+    DatePicker,
+    Input,
+    Select,
+    SelectItem,
+} from "@heroui/react";
 import { option } from "framer-motion/client";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -125,7 +131,19 @@ export default function CreateOrderPage() {
                         >
                             <Checkbox
                                 isSelected={existing}
-                                onValueChange={setExisting}
+                                onValueChange={() => {
+                                    {
+                                        existing
+                                            ? setExisting(false)
+                                            : setExisting(true);
+                                    }
+                                    setOrder({
+                                        ...order,
+                                        userId: "",
+                                        name: "",
+                                        phone: "",
+                                    });
+                                }}
                             >
                                 Existing user
                             </Checkbox>
@@ -169,13 +187,38 @@ export default function CreateOrderPage() {
                                 </Select>
                             ) : (
                                 <>
-                                    <Input type="text" label="Name" />
+                                    <Input
+                                        type="text"
+                                        label="Name"
+                                        onChange={(event) =>
+                                            setOrder({
+                                                ...order,
+                                                userId: "",
+                                                name: event.target.value,
+                                            })
+                                        }
+                                    />
                                     <Input
                                         type="text"
                                         label="Phone number/Email"
+                                        onChange={(event) =>
+                                            setOrder({
+                                                ...order,
+                                                phone: event.target.value,
+                                            })
+                                        }
                                     />
                                 </>
                             )}
+                            <DatePicker
+                                description="Order Date"
+                                onChange={(event) =>
+                                    setOrder({
+                                        ...order,
+                                        date: event!.toString(),
+                                    })
+                                }
+                            />
                             <h2 className="text-center">Order</h2>
                             {order.order.map((x, index: number) => {
                                 return (
