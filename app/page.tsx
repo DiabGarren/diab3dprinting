@@ -91,17 +91,13 @@ export default function HomePage() {
             <div className="items">
                 {items.length > 0 ? (
                     <>
-                        {items.map((item: Item, index: number) => {
-                            if (item.category != "Tools") {
-                                return (
-                                    <ItemCard
-                                        item={item}
-                                        colours={colours}
-                                        key={"item-" + index}
-                                    />
-                                );
-                            } else return <></>;
-                        })}
+                        {items.map((item: Item, index: number) => (
+                            <ItemCard
+                                item={item}
+                                colours={colours}
+                                key={"item-" + index}
+                            />
+                        ))}
                     </>
                 ) : (
                     <Loading />
