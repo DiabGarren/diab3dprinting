@@ -94,7 +94,7 @@ export default function HomePage() {
                         {items.map((item: Item, index: number) => {
                             return (
                                 <>
-                                    {item.category != "tool" ? (
+                                    {item.category != "Tools" ? (
                                         <ItemCard
                                             item={item}
                                             colours={colours}
