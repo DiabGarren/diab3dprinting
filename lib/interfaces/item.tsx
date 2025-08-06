@@ -2,6 +2,7 @@ export interface Item {
     _id: string;
     itemId: string;
     name: string;
+    category: string;
     colours:
         | [{ name: string; value: string }]
         | { name: string; value: string }[]

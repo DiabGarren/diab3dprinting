@@ -10,9 +10,6 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 
 export default function HomePage() {
-    const [items, setItems] = useState<Item[]>([]);
-    const [colours, setColours] = useState<Colour[]>([]);
-    const [metadata, setMetadata] = useState<Metadata>();
     const [user, setUser] = useState<User>({
         _id: "",
         firstName: "",
@@ -41,6 +38,9 @@ export default function HomePage() {
             postalCode: "",
         },
     });
+    const [items, setItems] = useState<Item[]>([]);
+    const [colours, setColours] = useState<Colour[]>([]);
+    const [metadata, setMetadata] = useState<Metadata>();
 
     useEffect(() => {
         const getProps = async () => {
@@ -93,11 +93,17 @@ export default function HomePage() {
                     <>
                         {items.map((item: Item, index: number) => {
                             return (
-                                <ItemCard
-                                    item={item}
-                                    colours={colours}
-                                    key={"item-" + index}
-                                />
+                                <>
+                                    {item.category != "tool" ? (
+                                        <ItemCard
+                                            item={item}
+                                            colours={colours}
+                                            key={"item-" + index}
+                                        />
+                                    ) : (
+                                        <></>
+                                    )}
+                                </>
                             );
                         })}
                     </>

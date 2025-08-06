@@ -4,6 +4,7 @@ const itemSchema = new Schema(
     {
         itemId: String,
         name: String,
+        category: String,
         colours: [{ name: String, value: String }],
         options: [
             {
