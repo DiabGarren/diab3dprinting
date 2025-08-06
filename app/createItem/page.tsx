@@ -41,6 +41,7 @@ export default function CreateItemPage() {
         _id: "",
         itemId: "",
         name: "",
+        category: "",
         colours: [],
         options: [
             {

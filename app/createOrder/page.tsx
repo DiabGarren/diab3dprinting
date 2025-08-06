@@ -64,6 +64,7 @@ export default function CreateOrderPage() {
                         newItems.push({
                             name: "Custom",
                             itemId: "custom",
+                            category: "",
                             colours: [],
                             options: [],
                             images: 0,

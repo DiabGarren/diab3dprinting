@@ -36,6 +36,7 @@ export async function POST(request: Request) {
         const item = await Item.create({
             itemId: body.itemId,
             name: body.name,
+            category: body.category,
             colours: body.colours,
             options: body.options,
             images: body.images,

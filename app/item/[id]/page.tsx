@@ -47,6 +47,7 @@ export default function ItemPage({
         _id: "",
         itemId: "",
         name: "",
+        category: "",
         colours: [],
         options: [
             {
