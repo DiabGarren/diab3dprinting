@@ -31,8 +31,6 @@ export async function POST(request: Request) {
         await connectDb();
         const body = await request.json();
 
-        console.log(body);
-
         const item = await Item.create({
             itemId: body.itemId,
             name: body.name,

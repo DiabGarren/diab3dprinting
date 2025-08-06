@@ -20,3 +20,32 @@ export async function GET() {
         return createErrorResponse(error.message, 500);
     }
 }
+
+export async function POST(request: Request) {
+    try {
+        await connectDb();
+        const body = await request.json();
+
+        await Order.create({
+            userId: body.userId,
+            name: body.name,
+            phone: body.phone,
+            date: body.date,
+            order: body.order,
+            shipping: body.shipping,
+            shippingCost: body.shippingCost,
+            address: body.address,
+            total: body.total,
+            status: body.status,
+        });
+
+        const res = { status: "success" };
+
+        return new NextResponse(JSON.stringify(res), {
+            status: 201,
+            headers: { "Content-Type": "application/json" },
+        });
+    } catch (error: any) {
+        return createErrorResponse(error.message, 500);
+    }
+}
