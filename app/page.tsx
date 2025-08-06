@@ -92,19 +92,15 @@ export default function HomePage() {
                 {items.length > 0 ? (
                     <>
                         {items.map((item: Item, index: number) => {
-                            return (
-                                <>
-                                    {item.category != "Tools" ? (
-                                        <ItemCard
-                                            item={item}
-                                            colours={colours}
-                                            key={"item-" + index}
-                                        />
-                                    ) : (
-                                        <></>
-                                    )}
-                                </>
-                            );
+                            if (item.category != "Tools") {
+                                return (
+                                    <ItemCard
+                                        item={item}
+                                        colours={colours}
+                                        key={"item-" + index}
+                                    />
+                                );
+                            } else return <></>;
                         })}
                     </>
                 ) : (
