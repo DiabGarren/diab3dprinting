@@ -2,7 +2,7 @@
 import Back from "@/components/back";
 import Body from "@/components/body";
 import { User } from "@/lib/interfaces/user";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function PasswordResetPage({
     params,
@@ -37,10 +37,28 @@ export default function PasswordResetPage({
             postalCode: "",
         },
     });
+
+    useEffect(() => {
+        const getUser = async () => {
+            const { id } = await params;
+            fetch(process.env.NEXT_PUBLIC_API_URL + "/user/" + id)
+                .then((res) => res.json())
+                .then((data) => {
+                    if (data.status == "success") {
+                        setUser(data.data);
+                    }
+                });
+        };
+        getUser();
+    }, []);
+
     return (
         <Body active="" user={user}>
             <div className="password-reset">
                 <Back href="/passwordReset" />
+                <h1>
+                    Reset Password - {user.firstName} {user.lastName}
+                </h1>
             </div>
         </Body>
     );
