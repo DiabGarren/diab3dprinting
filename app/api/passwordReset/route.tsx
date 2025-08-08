@@ -17,6 +17,7 @@ export async function POST(request: Request) {
             status: "success",
             message:
                 "An email has been sent to you with a link to reset your password",
+            userId: user._id,
         };
         return new NextResponse(JSON.stringify(res), {
             status: 200,
