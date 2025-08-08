@@ -1,9 +1,14 @@
 "use client";
+import Back from "@/components/back";
 import Body from "@/components/body";
 import { User } from "@/lib/interfaces/user";
 import { useState } from "react";
 
-export default function PasswordResetPage() {
+export default function PasswordResetPage({
+    params,
+}: {
+    params: Promise<{ id: string }>;
+}) {
     const [user, setUser] = useState<User>({
         _id: "",
         firstName: "",
@@ -34,7 +39,9 @@ export default function PasswordResetPage() {
     });
     return (
         <Body active="" user={user}>
-            <></>
+            <div className="password-reset">
+                <Back href="/passwordReset" />
+            </div>
         </Body>
     );
 }

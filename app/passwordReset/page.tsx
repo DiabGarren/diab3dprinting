@@ -67,7 +67,29 @@ export default function PasswordResetPage() {
                             }
                         )
                             .then((res) => res.json())
-                            .then((data) => setError(data));
+                            .then((data) => {
+                                setError(data);
+                                if (data.status == "success") {
+                                    fetch(
+                                        process.env.NEXT_PUBLIC_API_URL +
+                                            "/email",
+                                        {
+                                            method: "POST",
+                                            body: JSON.stringify({
+                                                sendTo: user.email,
+                                                subject: "Password Reset",
+                                                html: `<div>
+                                        <h1>Password Reset Requested</h1>
+                                        <p>Below is the link to reset the password for your Diab 3D Printing Account</p>
+                                        <a href="https://diab3dprinting.co.za/passwordReset/${user._id}" style="display:block;background-color:#0855c9;width:80%;max-width:120px;margin:10px auto;color:white;border-radius:5px;text-align:center;padding:5px 15px;">Reset Password</a>
+                                        <p>If you didn't make this request, please ignore this message.</p>
+                                    </div>`,
+                                                bcc: "",
+                                            }),
+                                        }
+                                    );
+                                }
+                            });
                     }}
                 >
                     <h2
