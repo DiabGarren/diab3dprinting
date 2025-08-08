@@ -27,7 +27,7 @@ export async function sendMail({
     try {
         await transporter.verify();
     } catch (error: any) {
-        console.error("Something went wrong");
+        console.error("Something went wrong", error);
         return;
     }
 
