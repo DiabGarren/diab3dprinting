@@ -309,7 +309,6 @@ export default function CheckoutPage() {
                                                             data.data._id
                                                         }" style="display:block;background-color:#0855c9;width:80%;max-width:120px;margin:10px auto;color:white;border-radius:5px;text-align:center;padding:5px 15px;">View Order</a>
                                                         </div>`,
-                                                        bcc: process.env.GMAIL2,
                                                     }),
                                                 }
                                             );
