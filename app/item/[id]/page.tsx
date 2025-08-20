@@ -69,7 +69,7 @@ export default function ItemPage({
         size: "",
         colour: "",
         price: 0,
-        qty: 0,
+        qty: 1,
     });
     const [currImg, setCurrImg] = useState(0);
     const [added, setAdded] = useState(false);
