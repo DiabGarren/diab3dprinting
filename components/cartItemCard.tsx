@@ -39,7 +39,7 @@ export default function CartItemCard(props: {
                 </div>
                 <div>
                     <p className="item-subtotal">
-                        Subtotal:{" "}
+                        Item Total:{" "}
                         <span className="text-[18px]">
                             R{props.price * props.qty}
                         </span>
