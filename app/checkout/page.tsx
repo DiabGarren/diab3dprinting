@@ -56,7 +56,7 @@ export default function CheckoutPage() {
                 qty: 0,
             },
         ],
-        shipping: "",
+        shipping: "Collect",
         shippingCost: 0,
         address: {
             street: "",
@@ -135,13 +135,13 @@ export default function CheckoutPage() {
                         </p>
                         <div className="border-b-[2px] border-(--primary) m-[5px_10px] p-[10px]">
                             <RadioGroup
-                                defaultValue={"Collect"}
+                                defaultValue={order.shipping}
                                 orientation="horizontal"
                                 className="items-center"
                                 onChange={(event) => {
                                     let shipCost = 0;
                                     if (event.target.value == "Deliver")
-                                        shipCost = 50;
+                                        shipCost = 70;
                                     setOrder({
                                         ...order,
                                         shipping: event.target.value,
@@ -248,28 +248,74 @@ export default function CheckoutPage() {
                                         method: "POST",
                                         body: JSON.stringify(order),
                                     }
-                                ).then((res) => {
-                                    if (res.status == 201) {
-                                        const newUser = { ...user };
-                                        if (
-                                            saveAddress &&
-                                            order.shipping == "Deliver"
-                                        )
-                                            newUser.address = order.address;
+                                )
+                                    .then((res) => res.json())
+                                    .then((data) => {
+                                        if (data.status == "success") {
+                                            const newUser = { ...user };
+                                            if (
+                                                saveAddress &&
+                                                order.shipping == "Deliver"
+                                            )
+                                                newUser.address = order.address;
 
-                                        newUser.cart = [];
-                                        fetch(
-                                            process.env.NEXT_PUBLIC_API_URL +
-                                                "/user/" +
-                                                user._id,
-                                            {
-                                                method: "PUT",
-                                                body: JSON.stringify(newUser),
-                                            }
-                                        );
-                                    }
-                                    push("/orders");
-                                });
+                                            newUser.cart = [];
+                                            fetch(
+                                                process.env
+                                                    .NEXT_PUBLIC_API_URL +
+                                                    "/user/" +
+                                                    user._id,
+                                                {
+                                                    method: "PUT",
+                                                    body: JSON.stringify(
+                                                        newUser
+                                                    ),
+                                                }
+                                            );
+                                            fetch(
+                                                process.env
+                                                    .NEXT_PUBLIC_API_URL +
+                                                    "/email",
+                                                {
+                                                    method: "POST",
+                                                    body: JSON.stringify({
+                                                        sendTo: user.email,
+                                                        subject:
+                                                            "3D Printing Order Placed",
+                                                        html: `<div>
+                                                        <h1>Dear ${
+                                                            user.firstName
+                                                        } ${user.lastName}</h1>
+                                                        <p>Thank you for placing an order with Diab 3D Printing</p>
+                                                        <div>
+                                                        <h2>Order</h2>
+                                                        ${order.order.map(
+                                                            (item) => {
+                                                                return `<h3>${item.name}</h3><p>Size: ${item.size}<br/>Colour: ${item.colour}<br/>Price: R${item.price}     Qty: ${item.qty}</p>`;
+                                                            }
+                                                        )}
+                                                        <h3>Shipping method</h3>
+                                                        <p>${order.shipping} ${
+                                                            order.shipping ==
+                                                            "Deliver"
+                                                                ? `- R${order.shippingCost}`
+                                                                : ""
+                                                        }</p>
+                                                        <h2>Total: R${
+                                                            order.total
+                                                        }</h2>
+                                                        </div>
+                                                        <a href="https://diab3dprinting.co.za/orders/${
+                                                            data.data._id
+                                                        }" style="display:block;background-color:#0855c9;width:80%;max-width:120px;margin:10px auto;color:white;border-radius:5px;text-align:center;padding:5px 15px;">View Order</a>
+                                                        </div>`,
+                                                        bcc: process.env.GMAIL2,
+                                                    }),
+                                                }
+                                            );
+                                            push("/orders/" + data.data._id);
+                                        }
+                                    });
                             }}
                         >
                             Place Order

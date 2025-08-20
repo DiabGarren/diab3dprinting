@@ -26,7 +26,7 @@ export async function POST(request: Request) {
         await connectDb();
         const body = await request.json();
 
-        await Order.create({
+        const order = await Order.create({
             userId: body.userId,
             name: body.name,
             phone: body.phone,
@@ -39,7 +39,7 @@ export async function POST(request: Request) {
             status: body.status,
         });
 
-        const res = { status: "success" };
+        const res = { status: "success", data: order };
 
         return new NextResponse(JSON.stringify(res), {
             status: 201,
