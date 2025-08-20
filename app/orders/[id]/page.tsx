@@ -104,7 +104,7 @@ export default function OrderPage({
                     <div className="order-invoice max-w-[100%] overflow-x-auto my-[15px] p-[15px]">
                         <div className="w-[550px] mx-auto">
                             <p className="text-(--print-green) text-[32px] font-[700]">
-                                DIAB DESGINS & CONSULTING
+                                DIAB DESIGNS & CONSULTING
                             </p>
                             <p className="text-(--print-green) text-[22px] font-[600]">
                                 CUSTOM 3D PRINTING
