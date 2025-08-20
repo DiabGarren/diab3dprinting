@@ -10,7 +10,7 @@ const transporter = nodemailer.createTransport({
 });
 
 export async function sendMail({
-    email = process.env.GMAIL,
+    email = `Garren Diab ${process.env.GMAIL}`,
     sendTo,
     bcc = process.env.GMAIL,
     subject,
