@@ -12,7 +12,7 @@ const transporter = nodemailer.createTransport({
 export async function sendMail({
     email = process.env.GMAIL,
     sendTo,
-    bcc = process.env.GMAIL2,
+    bcc = process.env.GMAIL,
     subject,
     body,
     html,
