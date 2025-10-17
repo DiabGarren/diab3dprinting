@@ -67,6 +67,7 @@ const metadataSchema = new Schema(
             },
         },
         printer: String,
+        categories: [String]
     },
     { collection: "metadata" }
 );

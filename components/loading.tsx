@@ -8,6 +8,7 @@ export default function Loading() {
                 alt={"Loading spinner"}
                 width={75}
                 height={75}
+                unoptimized
             />
         </div>
     );

@@ -6,6 +6,7 @@ import { Colour } from "@/lib/interfaces/colour";
 import { Item } from "@/lib/interfaces/item";
 import { Metadata } from "@/lib/interfaces/metadata";
 import { User } from "@/lib/interfaces/user";
+import { Button } from "@heroui/react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
@@ -39,6 +40,8 @@ export default function HomePage() {
         },
     });
     const [items, setItems] = useState<Item[]>([]);
+    // const [displayItems, setDisplayItems] = useState<Item[]>([]);
+    // const [page, setPage] = useState(1);
     const [colours, setColours] = useState<Colour[]>([]);
     const [metadata, setMetadata] = useState<Metadata>();
 
@@ -48,11 +51,17 @@ export default function HomePage() {
                 .then((res) => res.json())
                 .then((data) => {
                     if (data.status === "success") {
-                        setItems(
-                            data.data.items.sort((a: Item, b: Item) =>
-                                a.name > b.name ? 1 : -1
-                            )
+                        data.data.items.sort((a: Item, b: Item) =>
+                            a.name > b.name ? 1 : -1
                         );
+                        setItems(data.data.items);
+
+                        // const newItems = [];
+                        // for (let i = 0; i < 10; i++) {
+                        //     newItems.push(data.data.items[i]);
+                        // }
+                        // setDisplayItems(newItems);
+
                         setColours(data.data.colours);
                     }
                 });
@@ -98,6 +107,50 @@ export default function HomePage() {
                                 key={"item-" + index}
                             />
                         ))}
+                        {/* {displayItems.map((item: Item, index: number) => (
+                            <ItemCard
+                                item={item}
+                                colours={colours}
+                                key={"item-" + index}
+                            />
+                        ))}
+                        <Button
+                            onPress={() => {
+                                const newItems = [];
+                                for (
+                                    let i = 10 * (page - 2);
+                                    i < 10 + 10 * (page - 2);
+                                    i++
+                                ) {
+                                    if (items.length > i && i >= 0) {
+                                        newItems.push(items[i]);
+                                    }
+                                }
+                                setDisplayItems(newItems);
+                                setPage(page - 1);
+                            }}
+                        >
+                            {"<"}
+                        </Button>
+                        <p>{page}</p>
+                        <Button
+                            onPress={() => {
+                                const newItems = [];
+                                for (
+                                    let i = 10 * page;
+                                    i < 10 + 10 * page;
+                                    i++
+                                ) {
+                                    if (items.length > i) {
+                                        newItems.push(items[i]);
+                                    }
+                                }
+                                setDisplayItems(newItems);
+                                setPage(page + 1);
+                            }}
+                        >
+                            {">"}
+                        </Button> */}
                     </>
                 ) : (
                     <Loading />

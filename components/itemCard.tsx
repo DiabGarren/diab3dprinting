@@ -25,9 +25,7 @@ export default function ItemCard({
     return (
         <Link
             href={"/item/" + item._id}
-            className={`item-card border-b-[2px] border-(--primary) m-[5px] grid grid-cols-[auto_1fr] p-[10px] ${
-                item.category == "Tools" ? "hidden" : "block"
-            }`}
+            className={`item-card border-b-[2px] border-(--primary) m-[5px] grid grid-cols-[auto_1fr] p-[10px]`}
         >
             <div className="item-image relative">
                 <ImageFallback

@@ -64,4 +64,5 @@ export interface Metadata {
         };
     };
     printer: string;
+    categories: [string];
 }
