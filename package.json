@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@heroui/react": "^2.8.1",
+    "@octokit/rest": "^22.0.1",
     "bcrypt": "^6.0.0",
     "framer-motion": "^12.23.6",
     "mongoose": "^8.16.4",

@@ -6,7 +6,6 @@ import { Colour } from "@/lib/interfaces/colour";
 import { Item } from "@/lib/interfaces/item";
 import { Metadata } from "@/lib/interfaces/metadata";
 import { User } from "@/lib/interfaces/user";
-import { Button } from "@heroui/react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
