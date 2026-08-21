@@ -57,7 +57,9 @@ export default function RegisterPage() {
     }, []);
 
     return (
-        <Body active="register" user={user}>
+        <Body
+            active="register"
+            user={user}>
             <div className="register">
                 <Back href="" />
                 <h1 className="text-center">Sign Up</h1>
@@ -88,23 +90,20 @@ export default function RegisterPage() {
                             body: JSON.stringify(user),
                         }).then(async (res) => {
                             if (res.status === 201) {
-                                fetch(
-                                    process.env.NEXT_PUBLIC_API_URL + "/email",
-                                    {
-                                        method: "POST",
-                                        body: JSON.stringify({
-                                            sendTo: user.email,
-                                            subject: "Account Created",
-                                            html: `<div>
+                                fetch(process.env.NEXT_PUBLIC_API_URL + "/email", {
+                                    method: "POST",
+                                    body: JSON.stringify({
+                                        sendTo: user.email,
+                                        subject: "Account Created",
+                                        html: `<div>
                                         <h1>You now have a Diab 3D Printing Account</h1>
                                         <p>Account Successfully created</p>
-                                        <p>Start shopping now   <a href="https://diab3dprinting.vercel.app">Store</a></p>
-                                        <p>View your profile information   <a href="https://diab3dprinting.vercel.app/profile">Profile</a> </p>
+                                        <p>Start shopping now   <a href="https://3dprinting.garrendiab.co.za">Store</a></p>
+                                        <p>View your profile information   <a href="https://3dprinting.garrendiab.co.za/profile">Profile</a> </p>
                                     </div>`,
-                                            bcc: "",
-                                        }),
-                                    }
-                                ).then((res) => {
+                                        bcc: "",
+                                    }),
+                                }).then((res) => {
                                     if (res.status === 200) push("/");
                                 });
                                 return;
@@ -113,8 +112,7 @@ export default function RegisterPage() {
                             setError(data.message);
                             return;
                         });
-                    }}
-                >
+                    }}>
                     <Input
                         type="text"
                         label="First Name"
@@ -155,8 +153,7 @@ export default function RegisterPage() {
                         label="Perfered contact method"
                         onChange={(event) => {
                             setUser({ ...user, prefer: event.target.value });
-                        }}
-                    >
+                        }}>
                         <SelectItem key={"Email"}>Email</SelectItem>
                         <SelectItem key={"WhatsApp"}>WhatsApp</SelectItem>
                     </Select>
@@ -164,24 +161,23 @@ export default function RegisterPage() {
                         type="password"
                         label="Password"
                         className="mt-[15px]"
-                        onChange={(event) =>
-                            setUser({ ...user, password: event.target.value })
-                        }
+                        onChange={(event) => setUser({ ...user, password: event.target.value })}
                     />
                     <Input
                         type="password"
                         label="Confirm Password"
                         onChange={(event) => setConfirm(event.target.value)}
                     />
-                    <Button type="submit" className="button-green mt-[15px]">
+                    <Button
+                        type="submit"
+                        className="button-green mt-[15px]">
                         Sign Up
                     </Button>
                     <p>
                         {"Already have an account? "}
                         <Link
                             href="/login"
-                            className="text-(--primary) hover:underline"
-                        >
+                            className="text-(--primary) hover:underline">
                             Log In
                         </Link>
                     </p>
