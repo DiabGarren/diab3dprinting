@@ -92,7 +92,7 @@ export default function CheckoutPage() {
                                 qty: number;
                             }) => {
                                 sub += item.price * item.qty;
-                            }
+                            },
                         );
                         setOrder({
                             ...order,
@@ -113,26 +113,26 @@ export default function CheckoutPage() {
     }, []);
 
     return (
-        <Body active="cart" user={user}>
+        <Body
+            active="cart"
+            user={user}>
             <div className="checkout">
                 <Back href="cart" />
                 <h1 className="text-center">Checkout</h1>
                 {user._id ? (
                     <>
-                        <p className="text-center text-[22px] font-[600]">
-                            Order Summary
-                        </p>
+                        <p className="text-center text-[22px] font-[600]">Order Summary</p>
                         <div className="cart-items">
                             {user.cart.map((item, index) => (
-                                <div key={index} className="cart-item">
+                                <div
+                                    key={index}
+                                    className="cart-item">
                                     <CartItemCard {...item} />
                                 </div>
                             ))}
                         </div>
                         <h2 className="ml-[15px]">Subtotal: R{order.total}</h2>
-                        <p className="text-center text-[22px] font-[600]">
-                            Shipping
-                        </p>
+                        <p className="text-center text-[22px] font-[600]">Shipping</p>
                         <div className="border-b-[2px] border-(--primary) m-[5px_10px] p-[10px]">
                             <RadioGroup
                                 defaultValue={order.shipping}
@@ -140,27 +140,27 @@ export default function CheckoutPage() {
                                 className="items-center"
                                 onChange={(event) => {
                                     let shipCost = 0;
-                                    if (event.target.value == "Deliver")
-                                        shipCost = 70;
+                                    if (event.target.value == "Deliver") shipCost = 70;
                                     setOrder({
                                         ...order,
                                         shipping: event.target.value,
                                         shippingCost: shipCost,
                                     });
-                                }}
-                            >
-                                <Radio className={radioClass} value="Collect">
+                                }}>
+                                <Radio
+                                    className={radioClass}
+                                    value="Collect">
                                     Collect
                                 </Radio>
-                                <Radio className={radioClass} value="Deliver">
+                                <Radio
+                                    className={radioClass}
+                                    value="Deliver">
                                     Deliver
                                 </Radio>
                             </RadioGroup>
                             {order.shipping == "Deliver" ? (
                                 <>
-                                    <p className="text-center text-[18px] font-[500]">
-                                        Address
-                                    </p>
+                                    <p className="text-center text-[18px] font-[500]">Address</p>
                                     <div className="w-[80%] mx-auto">
                                         <Input
                                             label="Street"
@@ -170,8 +170,7 @@ export default function CheckoutPage() {
                                                     ...order,
                                                     address: {
                                                         ...order.address,
-                                                        street: event.target
-                                                            .value,
+                                                        street: event.target.value,
                                                     },
                                                 });
                                             }}
@@ -184,8 +183,7 @@ export default function CheckoutPage() {
                                                     ...order,
                                                     address: {
                                                         ...order.address,
-                                                        suburb: event.target
-                                                            .value,
+                                                        suburb: event.target.value,
                                                     },
                                                 });
                                             }}
@@ -198,8 +196,7 @@ export default function CheckoutPage() {
                                                     ...order,
                                                     address: {
                                                         ...order.address,
-                                                        city: event.target
-                                                            .value,
+                                                        city: event.target.value,
                                                     },
                                                 });
                                             }}
@@ -212,18 +209,14 @@ export default function CheckoutPage() {
                                                     ...order,
                                                     address: {
                                                         ...order.address,
-                                                        postalCode:
-                                                            event.target.value,
+                                                        postalCode: event.target.value,
                                                     },
                                                 });
                                             }}
                                         />
                                         <Checkbox
                                             defaultSelected
-                                            onValueChange={(event) =>
-                                                setSaveAddress(event)
-                                            }
-                                        >
+                                            onValueChange={(event) => setSaveAddress(event)}>
                                             Save address
                                         </Checkbox>
                                     </div>
@@ -232,9 +225,7 @@ export default function CheckoutPage() {
                                 <></>
                             )}
                         </div>
-                        <h2 className="ml-[15px]">
-                            Shipping Cost: R{order.shippingCost}
-                        </h2>
+                        <h2 className="ml-[15px]">Shipping Cost: R{order.shippingCost}</h2>
                         <hr className="border-(--primary) border-t-[2px] my-[15px]" />
                         <p className="text-center text-[22px] font-[600]">
                             Order Total: R{order.total + order.shippingCost}
@@ -242,81 +233,60 @@ export default function CheckoutPage() {
                         <Button
                             className="button-green mt-[10px]"
                             onClick={async () => {
-                                fetch(
-                                    process.env.NEXT_PUBLIC_API_URL + "/orders",
-                                    {
-                                        method: "POST",
-                                        body: JSON.stringify(order),
-                                    }
-                                )
+                                fetch(process.env.NEXT_PUBLIC_API_URL + "/orders", {
+                                    method: "POST",
+                                    body: JSON.stringify(order),
+                                })
                                     .then((res) => res.json())
                                     .then((data) => {
                                         if (data.status == "success") {
                                             const newUser = { ...user };
-                                            if (
-                                                saveAddress &&
-                                                order.shipping == "Deliver"
-                                            )
+                                            if (saveAddress && order.shipping == "Deliver")
                                                 newUser.address = order.address;
 
                                             newUser.cart = [];
                                             fetch(
-                                                process.env
-                                                    .NEXT_PUBLIC_API_URL +
+                                                process.env.NEXT_PUBLIC_API_URL +
                                                     "/user/" +
                                                     user._id,
                                                 {
                                                     method: "PUT",
-                                                    body: JSON.stringify(
-                                                        newUser
-                                                    ),
-                                                }
+                                                    body: JSON.stringify(newUser),
+                                                },
                                             );
-                                            fetch(
-                                                process.env
-                                                    .NEXT_PUBLIC_API_URL +
-                                                    "/email",
-                                                {
-                                                    method: "POST",
-                                                    body: JSON.stringify({
-                                                        sendTo: user.email,
-                                                        subject:
-                                                            "3D Printing Order Placed",
-                                                        html: `<div>
+                                            fetch(process.env.NEXT_PUBLIC_API_URL + "/email", {
+                                                method: "POST",
+                                                body: JSON.stringify({
+                                                    sendTo: user.email,
+                                                    subject: "3D Printing Order Placed",
+                                                    html: `<div>
                                                         <h1>Dear ${
                                                             user.firstName
                                                         } ${user.lastName}</h1>
                                                         <p>Thank you for placing an order with Diab 3D Printing</p>
                                                         <div>
                                                         <h2>Order</h2>
-                                                        ${order.order.map(
-                                                            (item) => {
-                                                                return `<h3>${item.name}</h3><p>Size: ${item.size}<br/>Colour: ${item.colour}<br/>Price: R${item.price}     Qty: ${item.qty}</p>`;
-                                                            }
-                                                        )}
+                                                        ${order.order.map((item) => {
+                                                            return `<h3>${item.name}</h3><p>Size: ${item.size}<br/>Colour: ${item.colour}<br/>Price: R${item.price}     Qty: ${item.qty}</p>`;
+                                                        })}
                                                         <h3>Shipping method</h3>
                                                         <p>${order.shipping} ${
-                                                            order.shipping ==
-                                                            "Deliver"
+                                                            order.shipping == "Deliver"
                                                                 ? `- R${order.shippingCost}`
                                                                 : ""
                                                         }</p>
-                                                        <h2>Total: R${
-                                                            order.total
-                                                        }</h2>
+                                                        <h2>Total: R${order.total}</h2>
                                                         </div>
-                                                        <a href="https://diab3dprinting.co.za/orders/${
+                                                        <a href="https://3dprinting.garrendiab.co.za/orders/${
                                                             data.data._id
                                                         }" style="display:block;background-color:#0855c9;width:80%;max-width:120px;margin:10px auto;color:white;border-radius:5px;text-align:center;padding:5px 15px;">View Order</a>
                                                         </div>`,
-                                                    }),
-                                                }
-                                            );
+                                                }),
+                                            });
                                             push("/orders/" + data.data._id);
                                         }
                                     });
-                            }}
-                        >
+                            }}>
                             Place Order
                         </Button>
                     </>
