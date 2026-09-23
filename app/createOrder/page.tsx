@@ -5,14 +5,7 @@ import ImageFallback from "@/components/imageFallback";
 import Loading from "@/components/loading";
 import { Item } from "@/lib/interfaces/item";
 import { User } from "@/lib/interfaces/user";
-import {
-    Button,
-    Checkbox,
-    DatePicker,
-    Input,
-    Select,
-    SelectItem,
-} from "@heroui/react";
+import { Button, Checkbox, DatePicker, Input, Select, SelectItem } from "@heroui/react";
 import { option } from "framer-motion/client";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -29,31 +22,14 @@ export default function CreateOrderPage() {
         prefer: "",
         password: "",
         level: 0,
-        cart: [
-            {
-                _id: "",
-                itemId: "",
-                name: "",
-                size: "",
-                price: 0,
-                colour: "",
-                qty: 0,
-            },
-        ],
-        address: {
-            street: "",
-            suburb: "",
-            city: "",
-            postalCode: "",
-        },
+        cart: [{ _id: "", itemId: "", name: "", size: "", price: 0, colour: "", qty: 0 }],
+        address: { street: "", suburb: "", city: "", postalCode: "" },
     });
 
     const [users, setUsers] = useState<User[]>([]);
 
     const [items, setItems] = useState<Item[]>([]);
-    const [colours, setColours] = useState<{ name: string; value: string }[]>(
-        []
-    );
+    const [colours, setColours] = useState<{ name: string; value: string }[]>([]);
 
     const [existing, setExisting] = useState(true);
     const [order, setOrder] = useState({
@@ -61,9 +37,7 @@ export default function CreateOrderPage() {
         name: "",
         phone: "",
         date: "",
-        order: [
-            { itemId: "", name: "", size: "", price: 0, colour: "", qty: 0 },
-        ],
+        order: [{ itemId: "", name: "", size: "", price: 0, colour: "", qty: 0 }],
         shipping: "",
         shippingCost: "",
         address: "",
@@ -77,9 +51,7 @@ export default function CreateOrderPage() {
                 .then((res) => res.json())
                 .then((data) => {
                     if (data.status === "success") {
-                        const newItems = data.data.items.sort(
-                            (a: Item, b: Item) => (a.name > b.name ? 1 : -1)
-                        );
+                        const newItems = data.data.items.sort((a: Item, b: Item) => (a.name > b.name ? 1 : -1));
                         newItems.push({
                             name: "Custom",
                             itemId: "custom",
@@ -126,25 +98,21 @@ export default function CreateOrderPage() {
                                 event.preventDefault();
                                 console.log(order);
 
-                                // fetch(process.env.NEXT_PUBLIC_API_URL + "");
-                            }}
-                        >
+                                fetch(process.env.NEXT_PUBLIC_API_URL + "/orders", {
+                                    method: "POST",
+                                    body: JSON.stringify(order),
+                                }).then((res) => {
+                                    if (res.status === 201) push("/");
+                                });
+                            }}>
                             <Checkbox
                                 isSelected={existing}
                                 onValueChange={() => {
                                     {
-                                        existing
-                                            ? setExisting(false)
-                                            : setExisting(true);
+                                        existing ? setExisting(false) : setExisting(true);
                                     }
-                                    setOrder({
-                                        ...order,
-                                        userId: "",
-                                        name: "",
-                                        phone: "",
-                                    });
-                                }}
-                            >
+                                    setOrder({ ...order, userId: "", name: "", phone: "" });
+                                }}>
                                 Existing user
                             </Checkbox>
                             {existing ? (
@@ -153,36 +121,19 @@ export default function CreateOrderPage() {
                                     onChange={(event) => {
                                         if (event.target.value) {
                                             const currUser =
-                                                users[
-                                                    users.findIndex(
-                                                        (user) =>
-                                                            user._id ==
-                                                            event.target.value
-                                                    )
-                                                ];
+                                                users[users.findIndex((user) => user._id == event.target.value)];
                                             setOrder({
                                                 ...order,
                                                 userId: event.target.value,
-                                                name:
-                                                    currUser.firstName +
-                                                    " " +
-                                                    currUser.lastName,
+                                                name: currUser.firstName + " " + currUser.lastName,
                                                 phone: currUser.phone,
                                             });
                                         } else {
-                                            setOrder({
-                                                ...order,
-                                                userId: "",
-                                                name: "",
-                                                phone: "",
-                                            });
+                                            setOrder({ ...order, userId: "", name: "", phone: "" });
                                         }
-                                    }}
-                                >
+                                    }}>
                                     {users?.map((user: User) => (
-                                        <SelectItem key={user._id}>
-                                            {user.firstName}
-                                        </SelectItem>
+                                        <SelectItem key={user._id}>{user.firstName}</SelectItem>
                                     ))}
                                 </Select>
                             ) : (
@@ -191,33 +142,19 @@ export default function CreateOrderPage() {
                                         type="text"
                                         label="Name"
                                         onChange={(event) =>
-                                            setOrder({
-                                                ...order,
-                                                userId: "",
-                                                name: event.target.value,
-                                            })
+                                            setOrder({ ...order, userId: "", name: event.target.value })
                                         }
                                     />
                                     <Input
                                         type="text"
                                         label="Phone number/Email"
-                                        onChange={(event) =>
-                                            setOrder({
-                                                ...order,
-                                                phone: event.target.value,
-                                            })
-                                        }
+                                        onChange={(event) => setOrder({ ...order, phone: event.target.value })}
                                     />
                                 </>
                             )}
                             <DatePicker
                                 description="Order Date"
-                                onChange={(event) =>
-                                    setOrder({
-                                        ...order,
-                                        date: event!.toString(),
-                                    })
-                                }
+                                onChange={(event) => setOrder({ ...order, date: event!.toString() })}
                             />
                             <h2 className="text-center">Order</h2>
                             {order.order.map((x, index: number) => {
@@ -228,17 +165,11 @@ export default function CreateOrderPage() {
                                             <button
                                                 className="bg-[#f54545] p-[5px] rounded trash cursor-pointer ml-[15px]"
                                                 onClick={() => {
-                                                    const newOrder = [
-                                                        ...order.order,
-                                                    ];
+                                                    const newOrder = [...order.order];
                                                     newOrder.splice(index, 1);
 
-                                                    setOrder({
-                                                        ...order,
-                                                        order: newOrder,
-                                                    });
-                                                }}
-                                            >
+                                                    setOrder({ ...order, order: newOrder });
+                                                }}>
                                                 <ImageFallback
                                                     src="/trash.svg"
                                                     alt="Trash icon"
@@ -251,134 +182,62 @@ export default function CreateOrderPage() {
                                         <Select
                                             label={"Select an item"}
                                             onChange={(event) => {
-                                                const newOrder = [
-                                                    ...order.order,
-                                                ];
-                                                newOrder[index].itemId =
-                                                    event.target.value;
-                                                setOrder({
-                                                    ...order,
-                                                    order: newOrder,
-                                                });
-                                            }}
-                                        >
+                                                const newOrder = [...order.order];
+                                                newOrder[index].itemId = event.target.value;
+                                                setOrder({ ...order, order: newOrder });
+                                            }}>
                                             {items?.map((item: Item) => (
-                                                <SelectItem key={item.itemId}>
-                                                    {item.name}
-                                                </SelectItem>
+                                                <SelectItem key={item.itemId}>{item.name}</SelectItem>
                                             ))}
                                         </Select>
                                         {order.order[index]?.itemId ? (
                                             <>
-                                                {order.order[index]?.itemId !==
-                                                "custom" ? (
+                                                {order.order[index]?.itemId !== "custom" ? (
                                                     <>
                                                         <Select
                                                             label="Item Size"
-                                                            onChange={(
-                                                                event
-                                                            ) => {
-                                                                const newOrder =
-                                                                    [
-                                                                        ...order.order,
-                                                                    ];
-                                                                newOrder[
-                                                                    index
-                                                                ].size =
-                                                                    event.target.value;
+                                                            onChange={(event) => {
+                                                                const newOrder = [...order.order];
+                                                                newOrder[index].size = event.target.value;
                                                                 try {
-                                                                    const itemIndex =
-                                                                        items.findIndex(
-                                                                            (
-                                                                                item
-                                                                            ) =>
-                                                                                item.itemId ===
-                                                                                order
-                                                                                    .order[
-                                                                                    index
-                                                                                ]
-                                                                                    .itemId
-                                                                        );
-                                                                    newOrder[
-                                                                        index
-                                                                    ].price =
-                                                                        items[
-                                                                            itemIndex
-                                                                        ].options[
-                                                                            items[
-                                                                                itemIndex
-                                                                            ].options.findIndex(
-                                                                                (
-                                                                                    option
-                                                                                ) =>
-                                                                                    option.size ===
-                                                                                    event
-                                                                                        .target
-                                                                                        .value
+                                                                    const itemIndex = items.findIndex(
+                                                                        (item) =>
+                                                                            item.itemId === order.order[index].itemId,
+                                                                    );
+                                                                    newOrder[index].price =
+                                                                        items[itemIndex].options[
+                                                                            items[itemIndex].options.findIndex(
+                                                                                (option) =>
+                                                                                    option.size === event.target.value,
                                                                             )
                                                                         ].price;
                                                                 } catch (error: unknown) {
-                                                                    newOrder[
-                                                                        index
-                                                                    ].price = 0;
+                                                                    newOrder[index].price = 0;
                                                                 }
-                                                                setOrder({
-                                                                    ...order,
-                                                                    order: newOrder,
-                                                                });
-                                                            }}
-                                                        >
+                                                                setOrder({ ...order, order: newOrder });
+                                                            }}>
                                                             {items[
                                                                 items.findIndex(
-                                                                    (item) =>
-                                                                        item.itemId ===
-                                                                        order
-                                                                            .order[
-                                                                            index
-                                                                        ].itemId
+                                                                    (item) => item.itemId === order.order[index].itemId,
                                                                 )
-                                                            ].options.map(
-                                                                (option) => (
-                                                                    <SelectItem
-                                                                        key={
-                                                                            option.size
-                                                                        }
-                                                                    >
-                                                                        {
-                                                                            option.size
-                                                                        }
-                                                                    </SelectItem>
-                                                                )
-                                                            )}
+                                                            ].options.map((option) => (
+                                                                <SelectItem key={option.size}>{option.size}</SelectItem>
+                                                            ))}
                                                         </Select>
                                                         <Input
                                                             type="number"
                                                             label="Item Price"
-                                                            value={order.order[
-                                                                index
-                                                            ].price.toString()}
+                                                            value={order.order[index].price.toString()}
                                                             readOnly
                                                         />
                                                     </>
                                                 ) : (
                                                     <>
-                                                        <Input
-                                                            type="text"
-                                                            label="Item Name"
-                                                        />
-                                                        <Input
-                                                            type="text"
-                                                            label="Item ID"
-                                                        />
-                                                        <Input
-                                                            type="text"
-                                                            label="Item Size"
-                                                        />
+                                                        <Input type="text" label="Item Name" />
+                                                        <Input type="text" label="Item ID" />
+                                                        <Input type="text" label="Item Size" />
 
-                                                        <Input
-                                                            type="number"
-                                                            label="Item Price"
-                                                        />
+                                                        <Input type="number" label="Item Price" />
                                                     </>
                                                 )}
                                                 <Select label="Item Colour">
@@ -388,21 +247,13 @@ export default function CreateOrderPage() {
                                                             startContent={
                                                                 <div
                                                                     className="rounded-[50%] w-[25px] aspect-[1/1] border-[1px]"
-                                                                    style={{
-                                                                        backgroundColor:
-                                                                            colour.value,
-                                                                    }}
-                                                                ></div>
-                                                            }
-                                                        >
+                                                                    style={{ backgroundColor: colour.value }}></div>
+                                                            }>
                                                             {colour.name}
                                                         </SelectItem>
                                                     ))}
                                                 </Select>
-                                                <Input
-                                                    type="number"
-                                                    label="Item Qty"
-                                                />
+                                                <Input type="number" label="Item Qty" />
                                             </>
                                         ) : (
                                             <></>
@@ -415,24 +266,13 @@ export default function CreateOrderPage() {
                                 className="button-green mt-[15px]"
                                 onClick={() => {
                                     const newOrder = [...order.order];
-                                    newOrder.push({
-                                        name: "",
-                                        itemId: "",
-                                        colour: "",
-                                        size: "",
-                                        price: 0,
-                                        qty: 0,
-                                    });
+                                    newOrder.push({ name: "", itemId: "", colour: "", size: "", price: 0, qty: 0 });
 
                                     setOrder({ ...order, order: newOrder });
-                                }}
-                            >
+                                }}>
                                 +
                             </Button>
-                            <Button
-                                type="submit"
-                                className="button-green mt-[20px]"
-                            >
+                            <Button type="submit" className="button-green mt-[20px]">
                                 Create Order
                             </Button>
                         </form>
